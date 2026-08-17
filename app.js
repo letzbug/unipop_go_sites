@@ -1,3 +1,29 @@
+const APP_VERSION='5.0.0';
+const APP_CACHE_PREFIXES=['unipop-sites-','unipop-go-sites-','unipop-go-'];
+
+async function cleanupLegacyAppCaches(){
+  // GitHub settings/token live in localStorage/sessionStorage and are intentionally untouched.
+  try{
+    if('serviceWorker' in navigator){
+      const regs=await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map(reg=>{
+        try{
+          const scope=new URL(reg.scope);
+          const here=new URL(location.href);
+          // Only remove workers that can control this GitHub Pages path/origin.
+          if(scope.origin===here.origin && here.href.startsWith(reg.scope)) return reg.unregister();
+        }catch{}
+        return Promise.resolve(false);
+      }));
+    }
+    if('caches' in window){
+      const keys=await caches.keys();
+      await Promise.all(keys.filter(k=>APP_CACHE_PREFIXES.some(p=>k.startsWith(p))).map(k=>caches.delete(k)));
+    }
+  }catch(err){console.warn('Cache cleanup skipped',err)}
+}
+
+cleanupLegacyAppCaches();
 const DATA_KEY='unipop-go-sites-data-v2';
 const CFG_KEY='unipop-go-sites-github-v2';
 const DB_NAME='unipop-go-sites-assets-v2';
