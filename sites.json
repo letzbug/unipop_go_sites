@@ -1,9 +1,65 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-17T12:02:49.113Z",
+  "updatedAt": "2026-08-17T12:25:59.992Z",
   "locations": [
     {
-      "id": "belval",
+      "id": "lieu-1786968909332",
+      "name": "IFEN (Bâtiment E)",
+      "aliases": [],
+      "address": "3 et 5 rue de la fonte\nL-4364 Esch-sur-Alzette",
+      "description": "Sonnez au tourniquet si vous n'avez pas de badge",
+      "lat": 49.503264,
+      "lng": 5.948238,
+      "website": "www.ifen.lu",
+      "phone": "+352 621 596 143",
+      "email": "gaspard.ngonokele@ifen.lu",
+      "parking": "Parking Université",
+      "parkingInfo": "A environ 5 minutes à pied.",
+      "transport": "Gare Belval-Université",
+      "transportInfo": "Train et lignes de bus à proximité.",
+      "accessInfo": "Entrée tourniquet / Sonnez -> Ifen",
+      "pmr": true,
+      "active": true,
+      "hero": "assets/lieu-1786968909332/hero.webp",
+      "heroThumb": "assets/lieu-1786968909332/thumb.webp",
+      "gallery": [
+        {
+          "path": "assets/lieu-1786968909332/gallery/1786969272982-ifen-garde.webp",
+          "name": "Ifen_garde.jpg",
+          "type": "image/webp",
+          "size": 172980
+        },
+        {
+          "path": "assets/lieu-1786968909332/gallery/1786969279588-ifen-entree.webp",
+          "name": "Ifen_entree.jpg",
+          "type": "image/webp",
+          "size": 68426
+        }
+      ],
+      "media": [],
+      "plans": [],
+      "tutorials": [],
+      "rooms": [
+        {
+          "id": "salle-1786969287616",
+          "name": "Salle Yoga (Salle 2)",
+          "aliases": [],
+          "floor": "rez-de-chaussée",
+          "description": "",
+          "directions": "Couloir principal",
+          "equipment": [
+            "Ecran Optoma 86 pouces",
+            "Apple TV",
+            "Soundbar",
+            "PC"
+          ],
+          "hero": "assets/lieu-1786968909332/rooms/salle-1786969287616/hero.webp",
+          "gallery": []
+        }
+      ]
+    },
+    {
+      "id": "belval-2",
       "name": "UniPop Belval",
       "aliases": [
         "Belval",
@@ -12,8 +68,8 @@
       ],
       "address": "14, Porte de France\nL-4360 Esch-sur-Alzette",
       "description": "Le site UniPop Belval est situé au cœur du quartier universitaire.",
-      "lat": 49.5001,
-      "lng": 5.9483,
+      "lat": 49.503513,
+      "lng": 5.945801,
       "active": true,
       "hero": "assets/belval/hero.webp",
       "heroThumb": "assets/belval/thumb.webp",
@@ -21,40 +77,34 @@
       "media": [],
       "plans": [],
       "tutorials": [],
-      "rooms": [],
-      "website": "https://www.unipop.lu",
-      "phone": "+352 247-88650",
-      "email": "",
-      "parking": "Parking Belval Plaza",
-      "parkingInfo": "À environ 5 minutes à pied.",
-      "transport": "Gare Belval-Université",
-      "transportInfo": "Train et lignes de bus à proximité.",
-      "accessInfo": "Entrée principale côté parvis.",
-      "pmr": true
-    },
-    {
-      "id": "belval",
-      "name": "UniPop Belval",
-      "aliases": [
-        "Belval",
-        "UniPop Esch",
-        "Site Belval"
+      "rooms": [
+        {
+          "id": "salle-1786968691594",
+          "name": "Salle 1.02 (Etage 1, salle 2)",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "Prendre l'escalator de l'Atrium",
+          "equipment": [
+            "Projecteur",
+            "HDMI",
+            "Apple TV",
+            "Whiteboard"
+          ],
+          "hero": "assets/belval-2/rooms/salle-1786968691594/hero.webp",
+          "gallery": [
+            {
+              "path": "assets/belval-2/rooms/salle-1786968691594/gallery/1786968712183-salle-101.webp",
+              "name": "Salle_101.jpg",
+              "type": "image/webp",
+              "size": 30618
+            }
+          ]
+        }
       ],
-      "address": "14, Porte de France\nL-4360 Esch-sur-Alzette",
-      "description": "Le site UniPop Belval est situé au cœur du quartier universitaire.",
-      "lat": 49.5001,
-      "lng": 5.9483,
-      "active": true,
-      "hero": "assets/niederanven/hero.webp",
-      "heroThumb": "assets/niederanven/thumb.webp",
-      "gallery": [],
-      "media": [],
-      "plans": [],
-      "tutorials": [],
-      "rooms": [],
       "website": "https://www.unipop.lu",
       "phone": "+352 247-88650",
-      "email": "",
+      "email": "info@unipop.lu",
       "parking": "Parking Belval Plaza",
       "parkingInfo": "À environ 5 minutes à pied.",
       "transport": "Gare Belval-Université",
