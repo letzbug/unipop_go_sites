@@ -1,4 +1,4 @@
-const APP_VERSION='5.0.0';
+const APP_VERSION='6.0.0';
 const APP_CACHE_PREFIXES=['unipop-sites-','unipop-go-sites-','unipop-go-'];
 
 async function cleanupLegacyAppCaches(){
@@ -41,7 +41,26 @@ const objectUrls=new Map();
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 
 function clone(x){return JSON.parse(JSON.stringify(x));}
-function loadData(){try{const x=JSON.parse(localStorage.getItem(DATA_KEY));return x&&x.locations?x:clone(demo)}catch{return clone(demo)}}
+function ensureUniqueLocationIds(source){
+  const out=source&&Array.isArray(source.locations)?source:clone(demo);
+  const used=new Set();
+  let changed=false;
+  out.locations.forEach((loc,index)=>{
+    let base=slug(loc.id||loc.name||`lieu-${index+1}`);
+    if(!base) base=`lieu-${index+1}`;
+    let candidate=base, n=2;
+    while(used.has(candidate)) candidate=`${base}-${n++}`;
+    if(loc.id!==candidate){loc.id=candidate;changed=true}
+    used.add(candidate);
+  });
+  if(changed){
+    out.updatedAt=new Date().toISOString();
+    try{localStorage.setItem(DATA_KEY,JSON.stringify(out))}catch{}
+    setTimeout(()=>toast('IDs de lieux dupliqués corrigés automatiquement'),300);
+  }
+  return out;
+}
+function loadData(){try{const x=JSON.parse(localStorage.getItem(DATA_KEY));return ensureUniqueLocationIds(x&&x.locations?x:clone(demo))}catch{return ensureUniqueLocationIds(clone(demo))}}
 function saveData(msg='Enregistré'){readFields();persistData(msg)}
 function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function slug(s=''){return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')||'item'}
@@ -84,9 +103,17 @@ function uniquePath(folder,file,optimize=true,prefix=''){const e=extFor(file,opt
 function readFields(){const x=current();if(!x)return;const oldId=x.id;$$('[data-field]').forEach(el=>{const f=el.dataset.field;let v=el.type==='checkbox'?el.checked:el.value;if(f==='aliases')v=v.split(',').map(s=>s.trim()).filter(Boolean);if(['lat','lng'].includes(f))v=v===''?'':Number(v);x[f]=v});if(!x.id)x.id='lieu-'+Date.now();if(currentId===oldId&&x.id!==oldId)currentId=x.id}
 function renderList(filter=''){
   const rows=data.locations.filter(x=>((x.name||'')+' '+(x.aliases||[]).join(' ')).toLowerCase().includes(filter.toLowerCase()));
-  $('#locationList').innerHTML=rows.map(x=>`<div class="location-item ${x.id===currentId?'active':''}" data-id="${esc(x.id)}"><img data-thumb="${esc(x.heroThumb||x.hero||'')}"><div><b>${esc(x.name||'Nouveau lieu')}</b><small>${esc((x.address||'').split('\n').pop()||'À compléter')}</small></div><span>›</span></div>`).join('');
+  $('#locationList').innerHTML=rows.map(x=>{const idx=data.locations.indexOf(x);return `<button type="button" class="location-item ${x.id===currentId?'active':''}" data-index="${idx}"><img data-thumb="${esc(x.heroThumb||x.hero||'')}"><div><b>${esc(x.name||'Nouveau lieu')}</b><small>${esc((x.address||'').split('\n').pop()||'À compléter')}</small></div><span>›</span></button>`}).join('');
   $('#lieuCount').textContent=data.locations.length;
-  $$('.location-item').forEach(el=>el.onclick=()=>{const targetId=el.dataset.id;if(current()&&currentId!==targetId)saveData('');currentId=targetId;$('#lieuxView').classList.remove('focus-list');renderList($('#search').value);fill();});
+  $$('.location-item').forEach(el=>el.onclick=()=>{
+    const idx=Number(el.dataset.index), target=data.locations[idx];
+    if(!target)return;
+    if(current()&&currentId!==target.id)saveData('');
+    currentId=target.id;
+    $('#lieuxView').classList.remove('focus-list');
+    renderList($('#search').value);
+    fill();
+  });
   $$('[data-thumb]').forEach(async img=>{img.src=await previewUrl(img.dataset.thumb)||''});
 }
 async function fill(){const x=current();if(!x)return;$$('[data-field]').forEach(el=>{const f=el.dataset.field;if(el.type==='checkbox')el.checked=!!x[f];else el.value=f==='aliases'?(x.aliases||[]).join(', '):(x[f]??'')});$('#heroDrop').classList.toggle('has',!!x.hero);$('#heroImg').src=await previewUrl(x.hero)||'';renderGallery();renderMedia();renderPlans();renderTuts();renderRooms();updateMap();previewData()}
