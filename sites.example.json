@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 2,
+  "updatedAt": "2026-08-17T10:30:00.000Z",
+  "locations": [
+    {
+      "id": "niederanven",
+      "name": "UniPop Niederanven",
+      "aliases": ["Niederanven"],
+      "address": "Niederanven",
+      "description": "",
+      "lat": 49.651,
+      "lng": 6.26,
+      "active": true,
+      "hero": "assets/niederanven/hero.webp",
+      "heroThumb": "assets/niederanven/thumb.webp",
+      "gallery": [],
+      "media": [],
+      "plans": [],
+      "tutorials": [],
+      "rooms": []
+    }
+  ]
+}
