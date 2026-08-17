@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 2,
+  "updatedAt": "2026-08-17T11:22:35.046Z",
+  "locations": [
+    {
+      "id": "belval",
+      "name": "UniPop Belval",
+      "aliases": [
+        "Belval",
+        "UniPop Esch",
+        "Site Belval"
+      ],
+      "address": "14, Porte de France\nL-4360 Esch-sur-Alzette",
+      "description": "Le site UniPop Belval est situé au cœur du quartier universitaire.",
+      "lat": 49.5001,
+      "lng": 5.9483,
+      "website": "https://www.unipop.lu",
+      "phone": "+352 247-88650",
+      "email": "",
+      "parking": "Parking Belval Plaza",
+      "parkingInfo": "À environ 5 minutes à pied.",
+      "transport": "Gare Belval-Université",
+      "transportInfo": "Train et lignes de bus à proximité.",
+      "accessInfo": "Entrée principale côté parvis.",
+      "pmr": true,
+      "active": true,
+      "hero": "assets/belval/hero.webp",
+      "heroThumb": "assets/belval/thumb.webp",
+      "gallery": [],
+      "media": [],
+      "plans": [],
+      "tutorials": [],
+      "rooms": [
+        {
+          "id": "salle-1786955108001",
+          "name": "Salle 201",
+          "aliases": [],
+          "floor": "2",
+          "description": "",
+          "directions": "Escalator Atrium",
+          "equipment": [
+            "Projecteur",
+            "HDMI",
+            "Apple TV",
+            "Whiteboard"
+          ],
+          "hero": "assets/belval/rooms/salle-1786955108001/hero.webp",
+          "gallery": []
+        }
+      ]
+    },
+    {
+      "id": "niederanven",
+      "name": "UniPop Niederanven",
+      "aliases": [
+        "Niederanven"
+      ],
+      "address": "Niederanven",
+      "description": "",
+      "lat": 49.651,
+      "lng": 6.26,
+      "active": true,
+      "hero": "",
+      "heroThumb": "",
+      "gallery": [],
+      "media": [],
+      "plans": [],
+      "tutorials": [],
+      "rooms": []
+    }
+  ]
+}
