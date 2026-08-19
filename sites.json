@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-19T12:49:32.184Z",
+  "updatedAt": "2026-08-19T12:50:59.928Z",
   "locations": [
     {
       "id": "lieu-1787125421299",
@@ -134,9 +134,9 @@
     },
     {
       "id": "lieu-1787122149919",
-      "name": "Lycée Bonnevoie",
+      "name": "Lycée de Bonnevoie",
       "aliases": [
-        "Lycée de Bonnevoie"
+        "Lycée Bonnevoie"
       ],
       "address": "119, rue du cimetière\nL-1338 Luxembourg",
       "description": "",
