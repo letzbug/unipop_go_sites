@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-19T09:15:42.330Z",
+  "updatedAt": "2026-08-19T12:44:46.572Z",
   "locations": [
     {
       "id": "lieu-1787125421299",
@@ -20,8 +20,8 @@
       "accessInfo": "",
       "pmr": false,
       "active": true,
-      "hero": "",
-      "heroThumb": "",
+      "hero": "assets/lieu-1787125421299/hero.webp",
+      "heroThumb": "assets/lieu-1787125421299/thumb.webp",
       "gallery": [],
       "media": [],
       "plans": [],
@@ -30,7 +30,7 @@
     },
     {
       "id": "lieu-1787125414802",
-      "name": "CNFPC-Esch-sur-Alzette - Site Sommet",
+      "name": "CNFPC-Belval",
       "aliases": [],
       "address": "1, Charles-de-Gaulle\nL - 4083 Esch-sur-Alzette",
       "description": "",
@@ -46,8 +46,8 @@
       "accessInfo": "",
       "pmr": false,
       "active": true,
-      "hero": "",
-      "heroThumb": "",
+      "hero": "assets/lieu-1787125414802/hero.webp",
+      "heroThumb": "assets/lieu-1787125414802/thumb.webp",
       "gallery": [],
       "media": [],
       "plans": [],
@@ -56,7 +56,7 @@
     },
     {
       "id": "lieu-1787125381350",
-      "name": "CNFPC-Esch/Alzette",
+      "name": "CNFPC-Esch-sur-Alzette - Site Sommet",
       "aliases": [],
       "address": "22, rue Henri Koch\nL - 4354 Esch-sur-Alzette",
       "description": "",
@@ -72,8 +72,8 @@
       "accessInfo": "",
       "pmr": false,
       "active": true,
-      "hero": "",
-      "heroThumb": "",
+      "hero": "assets/lieu-1787125381350/hero.webp",
+      "heroThumb": "assets/lieu-1787125381350/thumb.webp",
       "gallery": [],
       "media": [],
       "plans": [],
