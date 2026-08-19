@@ -1,11 +1,13 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-19T07:06:05.396Z",
+  "updatedAt": "2026-08-19T07:07:33.360Z",
   "locations": [
     {
       "id": "lieu-1787122149919",
-      "name": "Bouneweger Lycée Luxembourg",
-      "aliases": [],
+      "name": "Lycée Bonnevoie",
+      "aliases": [
+        "Lycée Bonnevoie"
+      ],
       "address": "119, rue du cimetière\nL-1338 Luxembourg",
       "description": "",
       "lat": 49.590991,
