@@ -1,7 +1,59 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-19T06:01:39.714Z",
+  "updatedAt": "2026-08-19T07:06:05.396Z",
   "locations": [
+    {
+      "id": "lieu-1787122149919",
+      "name": "Bouneweger Lycée Luxembourg",
+      "aliases": [],
+      "address": "119, rue du cimetière\nL-1338 Luxembourg",
+      "description": "",
+      "lat": 49.590991,
+      "lng": 6.142318,
+      "website": "https://www.bounewegerlycee.lu/",
+      "phone": "+352 40 39 45 – 1",
+      "email": "secretariat@bll.lu",
+      "parking": "",
+      "parkingInfo": "",
+      "transport": "",
+      "transportInfo": "",
+      "accessInfo": "",
+      "pmr": false,
+      "active": true,
+      "hero": "assets/lieu-1787122149919/hero.webp",
+      "heroThumb": "assets/lieu-1787122149919/thumb.webp",
+      "gallery": [],
+      "media": [],
+      "plans": [],
+      "tutorials": [],
+      "rooms": []
+    },
+    {
+      "id": "lieu-1787121708997",
+      "name": "ECG",
+      "aliases": [],
+      "address": "21 Rue Marguerite de Brabant, 1254 Hollerich Luxembourg",
+      "description": "",
+      "lat": 49.60255,
+      "lng": 6.10876,
+      "website": "https://www.ecg.lu/",
+      "phone": "+352 26 04 50",
+      "email": "info@ecg.lu",
+      "parking": "",
+      "parkingInfo": "",
+      "transport": "",
+      "transportInfo": "",
+      "accessInfo": "",
+      "pmr": false,
+      "active": true,
+      "hero": "assets/lieu-1787121708997/hero.webp",
+      "heroThumb": "assets/lieu-1787121708997/thumb.webp",
+      "gallery": [],
+      "media": [],
+      "plans": [],
+      "tutorials": [],
+      "rooms": []
+    },
     {
       "id": "lieu-1786968909332",
       "name": "IFEN (Bâtiment E)",
@@ -54,6 +106,22 @@
             "PC"
           ],
           "hero": "assets/lieu-1786968909332/rooms/salle-1786969287616/hero.webp",
+          "gallery": []
+        },
+        {
+          "id": "salle-1787121551271",
+          "name": "Salle de Musique",
+          "aliases": [],
+          "floor": "rez-de-chaussée",
+          "description": "",
+          "directions": "Couloir à gauche",
+          "equipment": [
+            "Ecran Optoma 86 pouces",
+            "Apple TV",
+            "Soundbar",
+            "PC"
+          ],
+          "hero": "",
           "gallery": []
         }
       ]
