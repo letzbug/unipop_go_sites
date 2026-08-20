@@ -1,4 +1,4 @@
-const APP_VERSION='6.0.0';
+const APP_VERSION='7.0.0';
 const APP_CACHE_PREFIXES=['unipop-sites-','unipop-go-sites-','unipop-go-'];
 
 async function cleanupLegacyAppCaches(){
@@ -29,6 +29,9 @@ const CFG_KEY='unipop-go-sites-github-v2';
 const DB_NAME='unipop-go-sites-assets-v2';
 const DB_STORE='assets';
 const API_VERSION='2026-03-10';
+const SYNC_KEY='unipop-go-sites-sync-v1';
+const BACKUP_KEY='unipop-go-sites-backup-before-sync-v1';
+const HAD_LOCAL_DATA=localStorage.getItem(DATA_KEY)!==null;
 
 const demo={schemaVersion:2,updatedAt:new Date().toISOString(),locations:[
   {id:'belval',name:'UniPop Belval',aliases:['Belval','UniPop Esch','Site Belval'],address:'14, Porte de France\nL-4360 Esch-sur-Alzette',description:'Le site UniPop Belval est situé au cœur du quartier universitaire.',lat:49.5001,lng:5.9483,website:'https://www.unipop.lu',phone:'+352 247-88650',email:'',parking:'Parking Belval Plaza',parkingInfo:'À environ 5 minutes à pied.',transport:'Gare Belval-Université',transportInfo:'Train et lignes de bus à proximité.',accessInfo:'Entrée principale côté parvis.',pmr:true,active:true,hero:'',heroThumb:'',gallery:[],media:[],plans:[],tutorials:[],rooms:[]},
@@ -66,8 +69,20 @@ function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt
 function slug(s=''){return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')||'item'}
 function current(){return data.locations.find(x=>x.id===currentId)}
 function newLocation(){return{id:'lieu-'+Date.now(),name:'',aliases:[],address:'',description:'',lat:'',lng:'',website:'',phone:'',email:'',parking:'',parkingInfo:'',transport:'',transportInfo:'',accessInfo:'',pmr:false,active:true,hero:'',heroThumb:'',gallery:[],media:[],plans:[],tutorials:[],rooms:[]}}
-function persistData(msg=''){data.updatedAt=new Date().toISOString();localStorage.setItem(DATA_KEY,JSON.stringify(data));stats();if(msg)toast(msg)}
+function getSyncMeta(){try{return JSON.parse(localStorage.getItem(SYNC_KEY)||'{}')}catch{return {}}}
+function setSyncMeta(patch={}){const m={...getSyncMeta(),...patch};localStorage.setItem(SYNC_KEY,JSON.stringify(m));renderSyncState();return m}
+function markDirty(){setSyncMeta({dirty:true,localChangedAt:new Date().toISOString()})}
+function persistData(msg='',opts={}){data.updatedAt=new Date().toISOString();localStorage.setItem(DATA_KEY,JSON.stringify(data));if(!opts.skipDirty)markDirty();stats();if(msg)toast(msg)}
 function bytesText(n=0){if(n<1024)return n+' o';if(n<1048576)return (n/1024).toFixed(1)+' Ko';return (n/1048576).toFixed(1)+' Mo'}
+function fmtDate(v){if(!v)return '';try{return new Date(v).toLocaleString('fr-LU')}catch{return v}}
+function renderSyncState(){const el=$('#syncState');if(!el)return;const m=getSyncMeta();if(m.loading){el.textContent='● Chargement GitHub…';el.className='sync syncing';return}if(m.dirty){el.textContent='● Modifications locales non publiées';el.className='sync dirty';return}if(m.lastSyncedAt){el.textContent=`● GitHub synchronisé · ${fmtDate(m.lastSyncedAt)}`;el.className='sync ok';return}if(HAD_LOCAL_DATA){el.textContent='● Données locales protégées';el.className='sync protected';return}el.textContent='● En attente de GitHub';el.className='sync'}
+function makePreSyncBackup(){if(!HAD_LOCAL_DATA||localStorage.getItem(BACKUP_KEY))return;const raw=localStorage.getItem(DATA_KEY);if(raw)localStorage.setItem(BACKUP_KEY,raw)}
+function remoteSitesUrl(){const c=getCfg();return `https://raw.githubusercontent.com/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/${encodeURIComponent(c.branch||'main')}/sites.json?t=${Date.now()}`}
+async function fetchRemoteSites(){const r=await fetch(remoteSitesUrl(),{cache:'no-store'});if(!r.ok)throw new Error(`Impossible de charger sites.json depuis GitHub (${r.status}).`);const x=await r.json();if(!x||!Array.isArray(x.locations))throw new Error('sites.json GitHub est invalide.');return ensureUniqueLocationIds(x)}
+async function applyRemoteData(remote,{silent=false}={}){data=remote;currentId=data.locations[0]?.id||null;localStorage.setItem(DATA_KEY,JSON.stringify(data));setSyncMeta({dirty:false,lastSyncedAt:new Date().toISOString(),lastRemoteUpdatedAt:remote.updatedAt||null,loading:false,initialized:true});renderList($('#search')?.value||'');await fill();stats();if(!silent)toast('Données chargées depuis GitHub')}
+async function reloadFromGitHub({automatic=false}={}){const m=getSyncMeta();if(m.dirty&&!automatic&&!confirm('Des modifications locales ne sont pas encore publiées. Les remplacer par la version GitHub ?'))return false;setSyncMeta({loading:true});try{const remote=await fetchRemoteSites();await applyRemoteData(remote,{silent:automatic});return true}catch(e){setSyncMeta({loading:false});if(!automatic)alert(e.message);else console.warn('Synchronisation GitHub au démarrage ignorée:',e);return false}}
+async function bootstrapSync(){makePreSyncBackup();renderSyncState();const m=getSyncMeta();if(!HAD_LOCAL_DATA){await reloadFromGitHub({automatic:true});return}if(m.initialized&&!m.dirty){try{const remote=await fetchRemoteSites();const rt=Date.parse(remote.updatedAt||0)||0,lt=Date.parse(data.updatedAt||0)||0;if(rt>lt)await applyRemoteData(remote,{silent:true})}catch(e){console.warn('Vérification GitHub impossible:',e)}}}
+
 
 function openDb(){return new Promise((resolve,reject)=>{const r=indexedDB.open(DB_NAME,1);r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains(DB_STORE))r.result.createObjectStore(DB_STORE,{keyPath:'path'})};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
 async function dbPut(rec){const db=await openDb();return new Promise((res,rej)=>{const tx=db.transaction(DB_STORE,'readwrite');tx.objectStore(DB_STORE).put(rec);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error)})}
@@ -187,7 +202,7 @@ async function publishGitHub(){
   const ref=await gh(`/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/git/ref/heads/${encodeURIComponent(c.branch)}`);const parentSha=ref.object.sha;
   const parentCommit=await gh(`/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/git/commits/${parentSha}`);const treeEntries=[];let n=0;
   for(const f of files){$('#publishStatus').textContent=`Upload ${++n}/${files.length} · ${f.path}`;const blob=await gh(`/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/git/blobs`,{method:'POST',body:{content:f.content,encoding:f.encoding}});treeEntries.push({path:f.path,mode:'100644',type:'blob',sha:blob.sha})}
-  $('#publishStatus').textContent='Création du commit…';const tree=await gh(`/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/git/trees`,{method:'POST',body:{base_tree:parentCommit.tree.sha,tree:treeEntries}});const commit=await gh(`/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/git/commits`,{method:'POST',body:{message:`UniPop Go Sites · ${new Date().toLocaleString('fr-LU')}`,tree:tree.sha,parents:[parentSha]}});await gh(`/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/git/refs/heads/${encodeURIComponent(c.branch)}`,{method:'PATCH',body:{sha:commit.sha,force:false}});$('#publishStatus').textContent='Publié avec succès ✓';setTimeout(()=>$('#publishProgress').classList.add('hidden'),1800);toast('Données publiées sur GitHub')
+  $('#publishStatus').textContent='Création du commit…';const tree=await gh(`/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/git/trees`,{method:'POST',body:{base_tree:parentCommit.tree.sha,tree:treeEntries}});const commit=await gh(`/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/git/commits`,{method:'POST',body:{message:`UniPop Go Sites · ${new Date().toLocaleString('fr-LU')}`,tree:tree.sha,parents:[parentSha]}});await gh(`/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/git/refs/heads/${encodeURIComponent(c.branch)}`,{method:'PATCH',body:{sha:commit.sha,force:false}});$('#publishStatus').textContent='Publié avec succès ✓';setSyncMeta({dirty:false,lastSyncedAt:new Date().toISOString(),lastRemoteUpdatedAt:out.updatedAt||new Date().toISOString(),initialized:true,loading:false});setTimeout(()=>$('#publishProgress').classList.add('hidden'),1800);toast('Données publiées sur GitHub')
 }
 async function testGithub(){const state=$('#ghState');try{if(state){state.textContent='Test en cours…';state.className='gh-state'}const c=saveCfgUI();const r=await gh(`/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}`);if(state){state.textContent='Connexion OK';state.className='gh-state ok'}toast(`Connexion OK · ${r.full_name}`)}catch(e){if(state){state.textContent='Connexion échouée';state.className='gh-state error'}alert(e.message)}}
 
@@ -200,11 +215,13 @@ $('#deleteLieu').onclick=()=>{if(!current()||!confirm('Supprimer ce lieu ?'))ret
 $('#heroFile').onchange=e=>{const f=e.target.files[0];if(f)setHero(f)};$('#addGallery').onclick=()=>$('#galleryFile').click();$('#galleryFile').onchange=e=>addFiles(e.target.files,'gallery','gallery');$('#mediaUploadBtn').onclick=()=>$('#mediaFile').click();$('#mediaFile').onchange=e=>addFiles(e.target.files,'media','media');$('#planUploadBtn').onclick=()=>$('#planFile').click();$('#planFile').onchange=e=>addFiles(e.target.files,'plans','plans');$('#addTut').onclick=()=>{current().tutorials=current().tutorials||[];current().tutorials.push({title:'Nouveau tutoriel',url:'',path:''});renderTuts()};$('#addRoom').onclick=()=>{current().rooms=current().rooms||[];current().rooms.push(newRoom());saveData('Salle ajoutée');renderRooms()};
 $('#googleMaps').onclick=()=>{const x=current();window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((x.lat&&x.lng)?x.lat+','+x.lng:x.address)}`,'_blank')};$('#appleMaps').onclick=()=>{const x=current();window.open(`https://maps.apple.com/?q=${encodeURIComponent(x.name)}&ll=${x.lat},${x.lng}`,'_blank')};
 $('#exportBtn').onclick=downloadJson;$('#publishTop').onclick=$('#publishBtn').onclick=()=>publishGitHub().catch(e=>{console.error(e);$('#publishProgress').classList.add('hidden');alert(e.message)});$('#testGithub').onclick=testGithub;
-$('#importBtn').onclick=()=>$('#importFile').click();$('#importFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const x=JSON.parse(await f.text());if(!x.locations)throw new Error();data=x;currentId=data.locations[0]?.id||null;localStorage.setItem(DATA_KEY,JSON.stringify(data));renderList();fill();stats();toast('JSON importé')}catch{alert('JSON invalide')}};
-$('#resetBtn').onclick=()=>{if(!confirm('Réinitialiser les données locales ?'))return;data=clone(demo);currentId=data.locations[0].id;localStorage.setItem(DATA_KEY,JSON.stringify(data));renderList();fill();stats()};
+$('#importBtn').onclick=()=>$('#importFile').click();$('#importFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const x=JSON.parse(await f.text());if(!x.locations)throw new Error();data=x;currentId=data.locations[0]?.id||null;localStorage.setItem(DATA_KEY,JSON.stringify(data));markDirty();renderList();fill();stats();toast('JSON importé')}catch{alert('JSON invalide')}};
+$('#resetBtn').onclick=()=>{if(!confirm('Réinitialiser les données locales ?'))return;data=clone(demo);currentId=data.locations[0].id;localStorage.setItem(DATA_KEY,JSON.stringify(data));markDirty();renderList();fill();stats()};
 $('#previewBtn').onclick=()=>{$('#previewModal').classList.remove('hidden');previewData()};$('#closePreview').onclick=()=>$('#previewModal').classList.add('hidden');
 ['ghOwner','ghRepo','ghBranch','ghToken','ghRemember'].forEach(id=>$('#'+id)?.addEventListener('change',saveCfgUI));
 $('#saveGithub')?.addEventListener('click',()=>{saveCfgUI();toast('Configuration GitHub enregistrée')});
 $('#publishGithubNow')?.addEventListener('click',()=>publishGitHub().catch(e=>{console.error(e);$('#publishProgress').classList.add('hidden');alert(e.message)}));
+$('#reloadGithub')?.addEventListener('click',()=>reloadFromGitHub());
+$('#reloadGithubConfig')?.addEventListener('click',()=>reloadFromGitHub());
 
-loadCfgUI();renderList();fill();stats();
+loadCfgUI();renderList();fill();stats();renderSyncState();bootstrapSync();
