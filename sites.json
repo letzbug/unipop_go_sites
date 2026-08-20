@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-08-20T05:54:16.362Z",
+  "updatedAt": "2026-08-20T05:56:13.862Z",
   "locations": [
     {
       "id": "lieu-1787125421299",
@@ -233,7 +233,7 @@
       "rooms": [
         {
           "id": "salle-1786969287616",
-          "name": "Salle Yoga (Salle 2)",
+          "name": "Salle",
           "aliases": [],
           "floor": "rez-de-chaussée",
           "description": "",
