@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-08-20T05:40:15.644Z",
+  "updatedAt": "2026-08-20T05:43:07.174Z",
   "locations": [
     {
       "id": "lieu-1787125421299",
@@ -246,7 +246,7 @@
           ],
           "hero": "assets/lieu-1786968909332/rooms/salle-1786969287616/hero.webp",
           "gallery": [],
-          "guideId": ""
+          "guideId": "guide-1787204081117"
         },
         {
           "id": "salle-1787121551271",
@@ -328,7 +328,7 @@
   "guides": [
     {
       "id": "guide-1787204081117",
-      "title": "Nouveau guide technique",
+      "title": "OPTOMA TOUCHSCREEN",
       "description": "Optoma Screen",
       "url": "",
       "path": "assets/guides/1787204409424-salle-prince-henri.pdf",
