@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 2,
-  "updatedAt": "2026-08-19T12:50:59.928Z",
+  "schemaVersion": 3,
+  "updatedAt": "2026-08-20T05:40:15.644Z",
   "locations": [
     {
       "id": "lieu-1787125421299",
@@ -26,7 +26,8 @@
       "media": [],
       "plans": [],
       "tutorials": [],
-      "rooms": []
+      "rooms": [],
+      "guideId": ""
     },
     {
       "id": "lieu-1787125414802",
@@ -52,7 +53,8 @@
       "media": [],
       "plans": [],
       "tutorials": [],
-      "rooms": []
+      "rooms": [],
+      "guideId": ""
     },
     {
       "id": "lieu-1787125381350",
@@ -78,7 +80,8 @@
       "media": [],
       "plans": [],
       "tutorials": [],
-      "rooms": []
+      "rooms": [],
+      "guideId": ""
     },
     {
       "id": "lieu-1787124120119",
@@ -104,7 +107,8 @@
       "media": [],
       "plans": [],
       "tutorials": [],
-      "rooms": []
+      "rooms": [],
+      "guideId": ""
     },
     {
       "id": "lieu-1787123499797",
@@ -130,7 +134,8 @@
       "media": [],
       "plans": [],
       "tutorials": [],
-      "rooms": []
+      "rooms": [],
+      "guideId": ""
     },
     {
       "id": "lieu-1787122149919",
@@ -158,7 +163,8 @@
       "media": [],
       "plans": [],
       "tutorials": [],
-      "rooms": []
+      "rooms": [],
+      "guideId": ""
     },
     {
       "id": "lieu-1787121708997",
@@ -184,7 +190,8 @@
       "media": [],
       "plans": [],
       "tutorials": [],
-      "rooms": []
+      "rooms": [],
+      "guideId": ""
     },
     {
       "id": "lieu-1786968909332",
@@ -238,7 +245,8 @@
             "PC"
           ],
           "hero": "assets/lieu-1786968909332/rooms/salle-1786969287616/hero.webp",
-          "gallery": []
+          "gallery": [],
+          "guideId": ""
         },
         {
           "id": "salle-1787121551271",
@@ -254,9 +262,11 @@
             "PC"
           ],
           "hero": "",
-          "gallery": []
+          "gallery": [],
+          "guideId": ""
         }
-      ]
+      ],
+      "guideId": ""
     },
     {
       "id": "belval-2",
@@ -299,7 +309,8 @@
               "type": "image/webp",
               "size": 30618
             }
-          ]
+          ],
+          "guideId": ""
         }
       ],
       "website": "https://www.unipop.lu",
@@ -310,7 +321,20 @@
       "transport": "Gare Belval-Université",
       "transportInfo": "Train et lignes de bus à proximité.",
       "accessInfo": "Entrée principale côté parvis.",
-      "pmr": true
+      "pmr": true,
+      "guideId": ""
+    }
+  ],
+  "guides": [
+    {
+      "id": "guide-1787204081117",
+      "title": "Nouveau guide technique",
+      "description": "Optoma Screen",
+      "url": "",
+      "path": "assets/guides/1787204409424-salle-prince-henri.pdf",
+      "name": "Salle Prince Henri.pdf",
+      "type": "application/pdf",
+      "size": 3254581
     }
   ]
 }
