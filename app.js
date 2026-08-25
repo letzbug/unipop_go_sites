@@ -202,6 +202,93 @@ function saveCfgUI(){const c={owner:$('#ghOwner').value.trim(),repo:$('#ghRepo')
 async function gh(url,{method='GET',body}={}){const c=saveCfgUI();if(!c.token)throw new Error('Ajoutez d’abord un token GitHub.');const r=await fetch(`https://api.github.com${url}`,{method,headers:{Accept:'application/vnd.github+json',Authorization:`Bearer ${c.token}`,'X-GitHub-Api-Version':API_VERSION,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});if(!r.ok){const txt=await r.text();throw new Error(`GitHub ${r.status}: ${txt.slice(0,280)}`)}return r.status===204?null:r.json()}
 function toBase64(bytes){let s='',u=new Uint8Array(bytes),chunk=0x8000;for(let i=0;i<u.length;i+=chunk)s+=String.fromCharCode(...u.subarray(i,i+chunk));return btoa(s)}
 function referencedPaths(obj){const set=new Set();const walk=x=>{if(!x)return;if(Array.isArray(x))return x.forEach(walk);if(typeof x==='object'){for(const[k,v]of Object.entries(x)){if((k==='path'||k==='hero'||k==='heroThumb')&&typeof v==='string'&&v.startsWith('assets/'))set.add(v);else walk(v)}}};walk(obj);return [...set]}
+
+function isoTime(v){
+  const t=Date.parse(v||'');
+  return Number.isFinite(t)?t:0;
+}
+function looksLikeRealData(x){
+  return !!(x && Array.isArray(x.locations) && x.locations.length);
+}
+function githubRawSitesUrl(c){
+  return `https://raw.githubusercontent.com/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/${encodeURIComponent(c.branch||'main')}/sites.json?v=${Date.now()}`;
+}
+async function fetchRemoteSites(){
+  const c=getCfg();
+  if(!c.owner||!c.repo)throw new Error('Owner ou repository GitHub manquant.');
+  // Public raw file does not need the token. This is deliberate: a new Mac can
+  // restore the central database before any write operation is allowed.
+  const r=await fetch(githubRawSitesUrl(c),{cache:'no-store'});
+  if(!r.ok)throw new Error(`Impossible de charger sites.json depuis GitHub (${r.status}).`);
+  const remote=await r.json();
+  if(!looksLikeRealData(remote))throw new Error('Le sites.json GitHub ne contient aucun lieu.');
+  remote.guides=Array.isArray(remote.guides)?remote.guides:[];
+  remote.locations.forEach(l=>{
+    l.rooms=Array.isArray(l.rooms)?l.rooms:[];
+    l.tutorials=Array.isArray(l.tutorials)?l.tutorials:[];
+    if(l.guideId==null)l.guideId='';
+    l.rooms.forEach(room=>{if(room.guideId==null)room.guideId=''});
+  });
+  return ensureUniqueLocationIds(remote);
+}
+function applyRemoteSites(remote,msg='Données GitHub chargées'){
+  data=remote;
+  currentId=data.locations[0]?.id||null;
+  localStorage.setItem(DATA_KEY,JSON.stringify(data));
+  renderList($('#search')?.value||'');
+  fill();
+  stats();
+  const info=$('#syncInfo');
+  if(info)info.textContent=`✓ ${msg} · ${data.locations.length} lieu(x) · ${data.updatedAt?new Date(data.updatedAt).toLocaleString('fr-LU'):'date inconnue'}`;
+  toast(msg);
+}
+async function syncFromGitHub({manual=false}={}){
+  const info=$('#syncInfo');
+  try{
+    if(info)info.textContent='Synchronisation avec GitHub…';
+    const remote=await fetchRemoteSites();
+    const local=loadData();
+    const remoteTime=isoTime(remote.updatedAt);
+    const localTime=isoTime(local.updatedAt);
+
+    if(manual){
+      const ok=confirm(
+        `Charger la base centrale depuis GitHub ?\n\n`+
+        `GitHub : ${remote.locations.length} lieu(x)\n`+
+        `Local : ${local.locations?.length||0} lieu(x)\n\n`+
+        `La copie locale actuelle sera remplacée, mais rien ne sera supprimé sur GitHub.`
+      );
+      if(!ok){
+        if(info)info.textContent='Synchronisation annulée. Les données locales restent inchangées.';
+        return false;
+      }
+      applyRemoteSites(remote,'Base centrale GitHub chargée');
+      return true;
+    }
+
+    // SAFE AUTO-SYNC:
+    // - New/old browsers get the newer central copy.
+    // - If this browser contains newer unpublished work, NEVER overwrite it.
+    const localLooksDefault=(local.locations?.length||0)<=2;
+    if(localLooksDefault || remoteTime>localTime){
+      applyRemoteSites(remote,'Base centrale GitHub synchronisée');
+      return true;
+    }
+
+    if(info){
+      info.textContent=localTime>remoteTime
+        ? 'Données locales plus récentes : aucune donnée locale n’a été écrasée.'
+        : 'Données locales déjà à jour.';
+    }
+    return false;
+  }catch(e){
+    console.warn('GitHub sync:',e);
+    if(info)info.textContent='GitHub indisponible : utilisation de la copie locale, aucune donnée supprimée.';
+    if(manual)alert(e.message);
+    return false;
+  }
+}
+
 async function publishGitHub(){
   saveData(null);const c=saveCfgUI();if(!c.owner||!c.repo||!c.token)throw new Error('Renseignez owner, repository et token GitHub dans Paramètres.');
   const out=cleanForExport();const paths=referencedPaths(out);const assets=await dbAll();const byPath=new Map(assets.map(a=>[a.path,a]));const files=[];
@@ -229,6 +316,19 @@ $('#resetBtn').onclick=()=>{if(!confirm('Réinitialiser les données locales ?')
 $('#previewBtn').onclick=()=>{$('#previewModal').classList.remove('hidden');previewData()};$('#closePreview').onclick=()=>$('#previewModal').classList.add('hidden');
 ['ghOwner','ghRepo','ghBranch','ghToken','ghRemember'].forEach(id=>$('#'+id)?.addEventListener('change',saveCfgUI));
 $('#saveGithub')?.addEventListener('click',()=>{saveCfgUI();toast('Configuration GitHub enregistrée')});
+$('#syncGithub')?.addEventListener('click',()=>syncFromGitHub({manual:true}));
 $('#publishGithubNow')?.addEventListener('click',()=>publishGitHub().catch(e=>{console.error(e);$('#publishProgress').classList.add('hidden');alert(e.message)}));
 
-loadCfgUI();renderList();fill();stats();
+
+let startupSyncFinished=false;
+const _syncFromGitHub=syncFromGitHub;
+syncFromGitHub=async function(opts={}){
+  try{return await _syncFromGitHub(opts)}
+  finally{
+    startupSyncFinished=true;
+    ['publishTop','publishBtn','publishGithubNow'].forEach(id=>{const b=$('#'+id);if(b)b.disabled=false});
+  }
+};
+['publishTop','publishBtn','publishGithubNow'].forEach(id=>{const b=$('#'+id);if(b)b.disabled=true});
+
+loadCfgUI();renderList();fill();stats();syncFromGitHub({manual:false});

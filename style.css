@@ -24,3 +24,18 @@
 
 /* v7 guides techniques */
 select{width:100%;background:#0d1929;border:1px solid #40536d;border-radius:6px;color:white;padding:10px 11px;outline:none}.guide-manager{grid-column:1/-1}.guide-list{display:grid;gap:12px;margin-top:16px}.guide-card{background:#0d1929;border:1px solid #293c55;border-radius:10px;padding:16px}.guide-card-head{display:grid;grid-template-columns:1fr auto;gap:10px}.guide-card textarea,.guide-card input{margin-top:9px}.guide-actions{display:flex;align-items:center;gap:12px;margin-top:10px}.guide-actions .assetpath{color:#7f91aa;overflow-wrap:anywhere}.guide-card .danger{width:auto}.room-card select{margin-top:0}
+
+.sync-info{
+  margin:14px 0;
+  padding:12px 14px;
+  border:1px solid rgba(80,140,200,.25);
+  border-radius:10px;
+  background:rgba(20,55,90,.12);
+  font-size:13px;
+  line-height:1.45;
+  color:#9db1c7;
+}
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
