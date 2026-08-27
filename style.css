@@ -39,3 +39,115 @@ button:disabled{
   opacity:.45;
   cursor:not-allowed;
 }
+
+
+/* =========================================================
+   Compact Salles editor — UI only, data model unchanged
+   ========================================================= */
+.room-count{
+  font-size:.78em;
+  color:var(--muted,#8094a8);
+  font-weight:600;
+}
+.room-toolbar{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:0 0 12px;
+}
+.room-toolbar input{
+  width:min(420px,100%);
+}
+.compact-room-list{
+  display:grid;
+  gap:8px;
+}
+.room-list-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:11px 12px;
+  border:1px solid rgba(100,140,175,.22);
+  border-radius:12px;
+  background:rgba(7,22,35,.34);
+}
+.room-list-row.active{
+  border-color:rgba(43,132,209,.8);
+  background:rgba(25,101,165,.10);
+}
+.room-list-main{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  min-width:0;
+}
+.room-list-icon{
+  width:34px;
+  height:34px;
+  flex:0 0 34px;
+  display:grid;
+  place-items:center;
+  border-radius:9px;
+  background:rgba(35,104,163,.15);
+  color:#62b4f6;
+}
+.room-list-main b,
+.room-list-main small{
+  display:block;
+}
+.room-list-main b{
+  line-height:1.25;
+}
+.room-list-main small{
+  margin-top:3px;
+  color:var(--muted,#8094a8);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.room-empty{
+  padding:18px 4px;
+  color:var(--muted,#8094a8);
+}
+.room-editor{
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid rgba(100,140,175,.20);
+}
+.room-editor-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:10px;
+}
+.room-editor-head h4{
+  margin:2px 0 0;
+  font-size:20px;
+}
+.room-editor-kicker{
+  color:#5a9ed9;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.room-card-editor{
+  margin:0;
+}
+@media(max-width:760px){
+  .room-list-row{
+    align-items:stretch;
+  }
+  .room-list-row>.ghost{
+    flex:0 0 auto;
+  }
+  .room-list-main small{
+    white-space:normal;
+  }
+  .room-editor-head{
+    align-items:stretch;
+    flex-direction:column;
+  }
+}

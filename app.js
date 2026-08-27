@@ -37,6 +37,7 @@ const demo={schemaVersion:3,updatedAt:new Date().toISOString(),guides:[],locatio
 
 let data=loadData();
 let currentId=data.locations[0]?.id||null;
+let currentRoomId=null;
 const objectUrls=new Map();
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 
@@ -110,6 +111,7 @@ function renderList(filter=''){
     if(!target)return;
     if(current()&&currentId!==target.id)saveData('');
     currentId=target.id;
+    currentRoomId=null;
     $('#lieuxView').classList.remove('focus-list');
     renderList($('#search').value);
     fill();
@@ -150,15 +152,165 @@ async function renderGuidesManager(){
   draw();
 }
 function newRoom(){return{id:'salle-'+Date.now(),name:'Nouvelle salle',aliases:[],floor:'',description:'',directions:'',equipment:[],guideId:'',hero:'',gallery:[]}}
-async function renderRooms(){const x=current();x.rooms=x.rooms||[];$('#roomList').innerHTML=x.rooms.map((r,i)=>`<div class="room-card"><div class="room-head"><input value="${esc(r.name||'')}" data-rname="${i}"><button class="danger small" data-rdel="${i}">Supprimer</button></div><div class="two"><div><label>Étage</label><input value="${esc(r.floor||'')}" data-rfloor="${i}"></div><div><label>Alias</label><input value="${esc((r.aliases||[]).join(', '))}" data-ralias="${i}"></div></div><label>Chemin vers la salle</label><textarea data-rdir="${i}">${esc(r.directions||'')}</textarea><label>Équipement</label><input value="${esc((r.equipment||[]).join(', '))}" data-req="${i}" placeholder="Projecteur, HDMI, PC…"><label>Guide technique</label><select data-rguide="${i}">${guideOptions(r.guideId||'')}</select><div class="room-media"><div class="room-photo"><img data-rimg="${i}"><label class="ghost small">Photo salle<input type="file" accept="image/*" data-rfile="${i}" hidden></label></div><div><label>Galerie</label><div class="room-gallery" data-rgallery="${i}"></div><label class="ghost small">Ajouter images<input type="file" accept="image/*" multiple data-rgfile="${i}" hidden></label></div></div></div>`).join('')||'<p>Aucune salle enregistrée.</p>';
-  for(const img of $$('[data-rimg]')){const r=x.rooms[+img.dataset.rimg];img.src=await previewUrl(r.hero)||''}
-  for(const box of $$('[data-rgallery]')){const r=x.rooms[+box.dataset.rgallery];box.innerHTML=(r.gallery||[]).map((g,j)=>`<span class="mini-thumb"><img data-rgimg="${box.dataset.rgallery}:${j}"><button data-rgdel="${box.dataset.rgallery}:${j}">×</button></span>`).join('')}
-  for(const img of $$('[data-rgimg]')){const[i,j]=img.dataset.rgimg.split(':').map(Number);img.src=await previewUrl(x.rooms[i].gallery[j].path)||''}
-  $$('[data-rname]').forEach(e=>e.oninput=()=>x.rooms[+e.dataset.rname].name=e.value);$$('[data-rfloor]').forEach(e=>e.oninput=()=>x.rooms[+e.dataset.rfloor].floor=e.value);$$('[data-ralias]').forEach(e=>e.oninput=()=>x.rooms[+e.dataset.ralias].aliases=e.value.split(',').map(s=>s.trim()).filter(Boolean));$$('[data-rdir]').forEach(e=>e.oninput=()=>x.rooms[+e.dataset.rdir].directions=e.value);$$('[data-req]').forEach(e=>e.oninput=()=>x.rooms[+e.dataset.req].equipment=e.value.split(',').map(s=>s.trim()).filter(Boolean));$$('[data-rguide]').forEach(e=>e.onchange=()=>{x.rooms[+e.dataset.rguide].guideId=e.value;persistData('Guide technique de la salle mis à jour')});
-  $$('[data-rdel]').forEach(e=>e.onclick=async()=>{const r=x.rooms.splice(+e.dataset.rdel,1)[0];for(const p of [r?.hero,...(r?.gallery||[]).map(g=>g.path)].filter(Boolean))await removeAsset(p);saveData('Salle supprimée');renderRooms()});
-  $$('[data-rfile]').forEach(e=>e.onchange=async()=>{const f=e.files[0];if(!f)return;const r=x.rooms[+e.dataset.rfile];if(r.hero)await removeAsset(r.hero);const path=`assets/${slug(x.id||x.name)}/rooms/${slug(r.id||r.name)}/hero.webp`;r.hero=(await storeFile(f,path,true)).path;saveData('Photo de salle ajoutée');renderRooms()});
-  $$('[data-rgfile]').forEach(e=>e.onchange=async()=>{const r=x.rooms[+e.dataset.rgfile];r.gallery=r.gallery||[];for(const f of e.files){r.gallery.push(await storeFile(f,uniquePath(`assets/${slug(x.id||x.name)}/rooms/${slug(r.id||r.name)}/gallery`,f,true),true))}saveData('Images de salle ajoutées');renderRooms()});
-  $$('[data-rgdel]').forEach(e=>e.onclick=async()=>{const[i,j]=e.dataset.rgdel.split(':').map(Number);const g=x.rooms[i].gallery.splice(j,1)[0];await removeAsset(g?.path);saveData();renderRooms()});
+async function renderRooms(){
+  const x=current();
+  if(!x)return;
+  x.rooms=x.rooms||[];
+
+  // If the selected room belongs to another location, close the editor.
+  if(currentRoomId && !x.rooms.some(r=>String(r.id)===String(currentRoomId))) currentRoomId=null;
+
+  const search=($('#roomSearch')?.value||'').trim().toLowerCase();
+  const visible=x.rooms
+    .map((r,i)=>({r,i}))
+    .filter(({r})=>{
+      if(!search)return true;
+      const hay=[r.name,r.floor,...(r.aliases||[])].join(' ').toLowerCase();
+      return hay.includes(search);
+    });
+
+  $('#roomCount').textContent=`(${x.rooms.length})`;
+  $('#roomSearch').classList.toggle('hidden',x.rooms.length<5);
+
+  $('#roomList').innerHTML=visible.length
+    ? visible.map(({r,i})=>`
+      <div class="room-list-row ${String(r.id)===String(currentRoomId)?'active':''}" data-room-id="${esc(r.id)}">
+        <div class="room-list-main">
+          <div class="room-list-icon">▣</div>
+          <div>
+            <b>${esc(r.name||'Salle sans nom')}</b>
+            <small>${esc([r.floor?`Étage ${r.floor}`:'', (r.aliases||[]).join(', ')].filter(Boolean).join(' · ')||'À compléter')}</small>
+          </div>
+        </div>
+        <button class="ghost small" type="button" data-room-edit="${esc(r.id)}">Modifier</button>
+      </div>`).join('')
+    : `<div class="room-empty">${search?'Aucune salle ne correspond à la recherche.':'Aucune salle enregistrée.'}</div>`;
+
+  $$('[data-room-edit]').forEach(btn=>btn.onclick=()=>{
+    currentRoomId=btn.dataset.roomEdit;
+    renderRooms();
+  });
+
+  const editor=$('#roomEditor');
+  const roomIndex=x.rooms.findIndex(r=>String(r.id)===String(currentRoomId));
+  if(roomIndex<0){
+    editor.classList.add('hidden');
+    editor.innerHTML='';
+    return;
+  }
+
+  const r=x.rooms[roomIndex];
+  editor.classList.remove('hidden');
+  editor.innerHTML=`
+    <div class="room-editor-head">
+      <div>
+        <span class="room-editor-kicker">Modification</span>
+        <h4>${esc(r.name||'Salle sans nom')}</h4>
+      </div>
+      <button class="ghost small" type="button" id="closeRoomEditor">Fermer</button>
+    </div>
+    <div class="room-card room-card-editor">
+      <div class="room-head">
+        <input value="${esc(r.name||'')}" data-rname="${roomIndex}" placeholder="Nom de la salle">
+        <button class="danger small" data-rdel="${roomIndex}">Supprimer</button>
+      </div>
+      <div class="two">
+        <div><label>Étage</label><input value="${esc(r.floor||'')}" data-rfloor="${roomIndex}"></div>
+        <div><label>Alias</label><input value="${esc((r.aliases||[]).join(', '))}" data-ralias="${roomIndex}"></div>
+      </div>
+      <label>Chemin vers la salle</label>
+      <textarea data-rdir="${roomIndex}">${esc(r.directions||'')}</textarea>
+      <label>Équipement</label>
+      <input value="${esc((r.equipment||[]).join(', '))}" data-req="${roomIndex}" placeholder="Projecteur, HDMI, PC…">
+      <label>Guide technique</label>
+      <select data-rguide="${roomIndex}">${guideOptions(r.guideId||'')}</select>
+      <div class="room-media">
+        <div class="room-photo">
+          <img data-rimg="${roomIndex}">
+          <label class="ghost small">Photo salle<input type="file" accept="image/*" data-rfile="${roomIndex}" hidden></label>
+        </div>
+        <div>
+          <label>Galerie</label>
+          <div class="room-gallery" data-rgallery="${roomIndex}"></div>
+          <label class="ghost small">Ajouter images<input type="file" accept="image/*" multiple data-rgfile="${roomIndex}" hidden></label>
+        </div>
+      </div>
+    </div>`;
+
+  $('#closeRoomEditor').onclick=()=>{
+    currentRoomId=null;
+    renderRooms();
+  };
+
+  for(const img of $$('[data-rimg]')){
+    const room=x.rooms[+img.dataset.rimg];
+    img.src=await previewUrl(room.hero)||'';
+  }
+  for(const box of $$('[data-rgallery]')){
+    const room=x.rooms[+box.dataset.rgallery];
+    box.innerHTML=(room.gallery||[]).map((g,j)=>`
+      <span class="mini-thumb">
+        <img data-rgimg="${box.dataset.rgallery}:${j}">
+        <button data-rgdel="${box.dataset.rgallery}:${j}">×</button>
+      </span>`).join('');
+  }
+  for(const img of $$('[data-rgimg]')){
+    const[i,j]=img.dataset.rgimg.split(':').map(Number);
+    img.src=await previewUrl(x.rooms[i].gallery[j].path)||'';
+  }
+
+  $$('[data-rname]').forEach(e=>e.oninput=()=>{
+    x.rooms[+e.dataset.rname].name=e.value;
+    const title=editor.querySelector('.room-editor-head h4');
+    if(title)title.textContent=e.value||'Salle sans nom';
+  });
+  $$('[data-rfloor]').forEach(e=>e.oninput=()=>x.rooms[+e.dataset.rfloor].floor=e.value);
+  $$('[data-ralias]').forEach(e=>e.oninput=()=>x.rooms[+e.dataset.ralias].aliases=e.value.split(',').map(s=>s.trim()).filter(Boolean));
+  $$('[data-rdir]').forEach(e=>e.oninput=()=>x.rooms[+e.dataset.rdir].directions=e.value);
+  $$('[data-req]').forEach(e=>e.oninput=()=>x.rooms[+e.dataset.req].equipment=e.value.split(',').map(s=>s.trim()).filter(Boolean));
+  $$('[data-rguide]').forEach(e=>e.onchange=()=>{
+    x.rooms[+e.dataset.rguide].guideId=e.value;
+    persistData('Guide technique de la salle mis à jour');
+  });
+
+  $$('[data-rdel]').forEach(e=>e.onclick=async()=>{
+    const i=+e.dataset.rdel;
+    const room=x.rooms[i];
+    if(!confirm(`Supprimer la salle « ${room?.name||'sans nom'} » ?`))return;
+    const removed=x.rooms.splice(i,1)[0];
+    for(const p of [removed?.hero,...(removed?.gallery||[]).map(g=>g.path)].filter(Boolean))await removeAsset(p);
+    currentRoomId=null;
+    saveData('Salle supprimée');
+    renderRooms();
+  });
+
+  $$('[data-rfile]').forEach(e=>e.onchange=async()=>{
+    const f=e.files[0];if(!f)return;
+    const room=x.rooms[+e.dataset.rfile];
+    if(room.hero)await removeAsset(room.hero);
+    const path=`assets/${slug(x.id||x.name)}/rooms/${slug(room.id||room.name)}/hero.webp`;
+    room.hero=(await storeFile(f,path,true)).path;
+    saveData('Photo de salle ajoutée');
+    renderRooms();
+  });
+
+  $$('[data-rgfile]').forEach(e=>e.onchange=async()=>{
+    const room=x.rooms[+e.dataset.rgfile];
+    room.gallery=room.gallery||[];
+    for(const f of e.files){
+      room.gallery.push(await storeFile(f,uniquePath(`assets/${slug(x.id||x.name)}/rooms/${slug(room.id||room.name)}/gallery`,f,true),true));
+    }
+    saveData('Images de salle ajoutées');
+    renderRooms();
+  });
+
+  $$('[data-rgdel]').forEach(e=>e.onclick=async()=>{
+    const[i,j]=e.dataset.rgdel.split(':').map(Number);
+    const g=x.rooms[i].gallery.splice(j,1)[0];
+    await removeAsset(g?.path);
+    saveData();
+    renderRooms();
+  });
 }
 
 function updateMap(){const x=current(),lat=Number(x.lat)||49.6116,lng=Number(x.lng)||6.1319;$('#mapFrame').src=`https://www.openstreetmap.org/export/embed.html?bbox=${lng-.01}%2C${lat-.006}%2C${lng+.01}%2C${lat+.006}&layer=mapnik&marker=${lat}%2C${lng}`}
@@ -306,9 +458,19 @@ function generic(view){$('#lieuxView').classList.add('hidden');$('#githubView')?
 
 $$('nav button[data-view]').forEach(b=>b.onclick=()=>{$$('nav button[data-view]').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#lieuxView').classList.add('hidden');$('#genericView').classList.add('hidden');$('#githubView')?.classList.add('hidden');if(b.dataset.view==='lieux'){$('#lieuxView').classList.remove('hidden');$('#pageTitle').textContent='Lieux & Salles';$('#pageSub').textContent='Base de données pour UniPop Go'}else if(b.dataset.view==='github'){$('#githubView').classList.remove('hidden');$('#pageTitle').textContent='Configuration GitHub';$('#pageSub').textContent='Publication de sites.json et des assets';loadCfgUI()}else generic(b.dataset.view)});
 $$('.tabs button').forEach(b=>b.onclick=()=>{$$('.tabs button').forEach(x=>x.classList.remove('active'));$$('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#tab-'+b.dataset.tab).classList.add('active')});
-$('#search').oninput=e=>renderList(e.target.value);$('#saveBtn').onclick=()=>{saveData();renderList($('#search').value);fill()};$('#addLieu').onclick=()=>{if(current())saveData('');const x=newLocation();data.locations.unshift(x);currentId=x.id;persistData('Nouveau lieu créé');$('#search').value='';$('#lieuxView').classList.remove('focus-list');renderList();fill();document.querySelector('[data-field="name"]')?.focus()};$('#backToList').onclick=()=>{if(current())saveData('');$('#search').value='';renderList();$('#lieuxView').classList.add('focus-list');document.querySelector('.locations')?.scrollIntoView({behavior:'smooth',block:'start'})};
+$('#search').oninput=e=>renderList(e.target.value);
+$('#roomSearch').oninput=()=>renderRooms();$('#saveBtn').onclick=()=>{saveData();renderList($('#search').value);fill()};$('#addLieu').onclick=()=>{if(current())saveData('');const x=newLocation();data.locations.unshift(x);currentId=x.id;persistData('Nouveau lieu créé');$('#search').value='';$('#lieuxView').classList.remove('focus-list');renderList();fill();document.querySelector('[data-field="name"]')?.focus()};$('#backToList').onclick=()=>{if(current())saveData('');$('#search').value='';renderList();$('#lieuxView').classList.add('focus-list');document.querySelector('.locations')?.scrollIntoView({behavior:'smooth',block:'start'})};
 $('#deleteLieu').onclick=()=>{if(!current()||!confirm('Supprimer ce lieu ?'))return;data.locations=data.locations.filter(x=>x.id!==currentId);currentId=data.locations[0]?.id||null;persistData('Lieu supprimé');renderList();fill();if(!currentId)$('#lieuxView').classList.add('focus-list')};
-$('#heroFile').onchange=e=>{const f=e.target.files[0];if(f)setHero(f)};$('#addGallery').onclick=()=>$('#galleryFile').click();$('#galleryFile').onchange=e=>addFiles(e.target.files,'gallery','gallery');$('#mediaUploadBtn').onclick=()=>$('#mediaFile').click();$('#mediaFile').onchange=e=>addFiles(e.target.files,'media','media');$('#planUploadBtn').onclick=()=>$('#planFile').click();$('#planFile').onchange=e=>addFiles(e.target.files,'plans','plans');$('#addTut').onclick=()=>{current().tutorials=current().tutorials||[];current().tutorials.push({title:'Nouveau tutoriel',url:'',path:''});renderTuts()};$('#addRoom').onclick=()=>{current().rooms=current().rooms||[];current().rooms.push(newRoom());saveData('Salle ajoutée');renderRooms()};
+$('#heroFile').onchange=e=>{const f=e.target.files[0];if(f)setHero(f)};$('#addGallery').onclick=()=>$('#galleryFile').click();$('#galleryFile').onchange=e=>addFiles(e.target.files,'gallery','gallery');$('#mediaUploadBtn').onclick=()=>$('#mediaFile').click();$('#mediaFile').onchange=e=>addFiles(e.target.files,'media','media');$('#planUploadBtn').onclick=()=>$('#planFile').click();$('#planFile').onchange=e=>addFiles(e.target.files,'plans','plans');$('#addTut').onclick=()=>{current().tutorials=current().tutorials||[];current().tutorials.push({title:'Nouveau tutoriel',url:'',path:''});renderTuts()};$('#addRoom').onclick=()=>{
+  const x=current();if(!x)return;
+  x.rooms=x.rooms||[];
+  const room=newRoom();
+  room.name='';
+  x.rooms.push(room);
+  currentRoomId=room.id;
+  saveData('Nouvelle salle créée');
+  renderRooms();
+};
 $('#googleMaps').onclick=()=>{const x=current();window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((x.lat&&x.lng)?x.lat+','+x.lng:x.address)}`,'_blank')};$('#appleMaps').onclick=()=>{const x=current();window.open(`https://maps.apple.com/?q=${encodeURIComponent(x.name)}&ll=${x.lat},${x.lng}`,'_blank')};
 $('#exportBtn').onclick=downloadJson;$('#publishTop').onclick=$('#publishBtn').onclick=()=>publishGitHub().catch(e=>{console.error(e);$('#publishProgress').classList.add('hidden');alert(e.message)});$('#testGithub').onclick=testGithub;
 $('#importBtn').onclick=()=>$('#importFile').click();$('#importFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const x=JSON.parse(await f.text());if(!x.locations)throw new Error();data=x;currentId=data.locations[0]?.id||null;localStorage.setItem(DATA_KEY,JSON.stringify(data));renderList();fill();stats();toast('JSON importé')}catch{alert('JSON invalide')}};
