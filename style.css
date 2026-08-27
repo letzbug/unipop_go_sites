@@ -256,3 +256,42 @@ button:disabled{
     grid-template-columns:1fr;
   }
 }
+
+
+/* =========================================================
+   Global Guides / Plans / Médias by lieu
+   UI/navigation only — storage structure unchanged
+   ========================================================= */
+.global-lieu-head-wrap{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+.global-lieu-head-wrap .global-lieu-head{
+  margin:0;
+}
+.global-add-btn{
+  white-space:nowrap;
+}
+.global-empty-card{
+  min-height:86px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  border:1px dashed rgba(93,137,175,.28);
+  border-radius:12px;
+  color:var(--muted,#8094a8);
+  background:rgba(7,22,35,.18);
+  text-align:center;
+}
+@media(max-width:760px){
+  .global-lieu-head-wrap{
+    grid-template-columns:1fr;
+  }
+  .global-add-btn{
+    width:100%;
+  }
+}
