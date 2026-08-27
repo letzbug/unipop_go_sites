@@ -1,7 +1,36 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-08-27T11:23:05.930Z",
+  "updatedAt": "2026-08-27T12:01:32.524Z",
   "locations": [
+    {
+      "id": "lieu-1787831332536",
+      "name": "UniPop Ettelbrück",
+      "aliases": [
+        "Centre Administratif Nordstad"
+      ],
+      "address": "avenue des Alliés, 9012 Ettelbrueck",
+      "description": "",
+      "lat": 49.83899,
+      "lng": 6.09817,
+      "website": "",
+      "phone": "",
+      "email": "",
+      "parking": "",
+      "parkingInfo": "",
+      "transport": "",
+      "transportInfo": "",
+      "accessInfo": "",
+      "pmr": false,
+      "active": true,
+      "guideId": "",
+      "hero": "assets/lieu-1787831332536/hero.webp",
+      "heroThumb": "assets/lieu-1787831332536/thumb.webp",
+      "gallery": [],
+      "media": [],
+      "plans": [],
+      "tutorials": [],
+      "rooms": []
+    },
     {
       "id": "lieu-1787826755852",
       "name": "Lycée Nic Biever",
@@ -10,8 +39,8 @@
       ],
       "address": "28 Rue du Parc, 3542 Dudelange",
       "description": "",
-      "lat": "",
-      "lng": "",
+      "lat": 49.4827,
+      "lng": 6.089,
       "website": "https://www.lnbd.lu/",
       "phone": "+352 51 60 31",
       "email": "secretariat@lnbd.lu",
