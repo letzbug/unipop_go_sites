@@ -1,7 +1,36 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-08-25T06:11:49.305Z",
+  "updatedAt": "2026-08-27T11:23:05.930Z",
   "locations": [
+    {
+      "id": "lieu-1787826755852",
+      "name": "Lycée Nic Biever",
+      "aliases": [
+        "Lycée Nic Biever"
+      ],
+      "address": "28 Rue du Parc, 3542 Dudelange",
+      "description": "",
+      "lat": "",
+      "lng": "",
+      "website": "https://www.lnbd.lu/",
+      "phone": "+352 51 60 31",
+      "email": "secretariat@lnbd.lu",
+      "parking": "",
+      "parkingInfo": "",
+      "transport": "",
+      "transportInfo": "",
+      "accessInfo": "",
+      "pmr": false,
+      "active": true,
+      "guideId": "",
+      "hero": "assets/lieu-1787826755852/hero.webp",
+      "heroThumb": "assets/lieu-1787826755852/thumb.webp",
+      "gallery": [],
+      "media": [],
+      "plans": [],
+      "tutorials": [],
+      "rooms": []
+    },
     {
       "id": "lieu-1787125421299",
       "name": "CNFPC-Ettelbrück",
