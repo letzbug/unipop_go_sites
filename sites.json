@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-08-27T12:01:32.524Z",
+  "updatedAt": "2026-08-27T12:08:40.130Z",
   "locations": [
     {
       "id": "lieu-1787831332536",
@@ -17,8 +17,8 @@
       "email": "",
       "parking": "",
       "parkingInfo": "",
-      "transport": "",
-      "transportInfo": "",
+      "transport": "Ettelbruck, H.v.Landewyck",
+      "transportInfo": "119, 292, 941, 992, K03, K06, K08, K09, K10 ,K11, K12, K13, K53, K54, K57,MH4, LNBCBB\n",
       "accessInfo": "",
       "pmr": false,
       "active": true,
