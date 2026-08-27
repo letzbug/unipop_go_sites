@@ -454,7 +454,116 @@ async function publishGitHub(){
 }
 async function testGithub(){const state=$('#ghState');try{if(state){state.textContent='Test en cours…';state.className='gh-state'}const c=saveCfgUI();const r=await gh(`/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}`);if(state){state.textContent='Connexion OK';state.className='gh-state ok'}toast(`Connexion OK · ${r.full_name}`)}catch(e){if(state){state.textContent='Connexion échouée';state.className='gh-state error'}alert(e.message)}}
 
-function generic(view){$('#lieuxView').classList.add('hidden');$('#githubView')?.classList.add('hidden');$('#genericView').classList.remove('hidden');const title={dashboard:'Tableau de bord',salles:'Salles',tutorials:'Tutoriels',guides:'Guides techniques',plans:'Plans',media:'Médias'}[view];$('#genericTitle').textContent=title;if(view==='guides'){ $('#pageTitle').textContent=title;renderGuidesManager();return;}let items=[];if(view==='dashboard')items=data.locations.map(x=>({h:x.name,p:`${x.rooms?.length||0} salles · ${x.gallery?.length||0} images`}));if(view==='salles')data.locations.forEach(x=>(x.rooms||[]).forEach(r=>items.push({h:r.name,p:x.name+' · '+(r.floor||'')})));if(view==='tutorials')data.locations.forEach(x=>(x.tutorials||[]).forEach(r=>items.push({h:r.title,p:x.name})));if(view==='plans')data.locations.forEach(x=>(x.plans||[]).forEach(r=>items.push({h:r.name,p:x.name})));if(view==='media')data.locations.forEach(x=>(x.media||[]).forEach(r=>items.push({h:r.name,p:x.name})));$('#genericContent').innerHTML=items.map(i=>`<div class="generic-card"><h3>${esc(i.h)}</h3><p>${esc(i.p)}</p></div>`).join('')||'<p>Aucune donnée.</p>';$('#pageTitle').textContent=title}
+function openLieuFromGlobal(lieuId,tab='rooms',roomId=''){
+  const target=data.locations.find(l=>String(l.id)===String(lieuId));
+  if(!target)return;
+  if(current()&&currentId!==target.id)saveData('');
+  currentId=target.id;
+  currentRoomId=roomId||null;
+
+  $$('nav button[data-view]').forEach(x=>x.classList.remove('active'));
+  const lieuxBtn=$('nav button[data-view="lieux"]');
+  lieuxBtn?.classList.add('active');
+
+  $('#genericView').classList.add('hidden');
+  $('#githubView')?.classList.add('hidden');
+  $('#lieuxView').classList.remove('hidden');
+  $('#pageTitle').textContent='Lieux & Salles';
+  $('#pageSub').textContent='Base de données pour UniPop Go';
+
+  renderList($('#search')?.value||'');
+  fill().then(()=>{
+    $$('.tabs button').forEach(x=>x.classList.remove('active'));
+    $$('.tab').forEach(x=>x.classList.remove('active'));
+    const tabBtn=$(`.tabs button[data-tab="${tab}"]`);
+    const tabPanel=$(`#tab-${tab}`);
+    tabBtn?.classList.add('active');
+    tabPanel?.classList.add('active');
+    if(tab==='rooms')renderRooms();
+    if(tab==='tutorials')renderTuts();
+    setTimeout(()=>tabPanel?.scrollIntoView({behavior:'smooth',block:'start'}),50);
+  });
+}
+
+function globalGroupHeader(lieu){
+  return `<button class="global-lieu-head" data-global-lieu="${esc(lieu.id)}" type="button">
+    <div>
+      <span class="global-lieu-kicker">Lieu</span>
+      <b>${esc(lieu.name||'Lieu sans nom')}</b>
+    </div>
+    <span>Ouvrir le lieu ›</span>
+  </button>`;
+}
+
+function generic(view){
+  $('#lieuxView').classList.add('hidden');
+  $('#githubView')?.classList.add('hidden');
+  $('#genericView').classList.remove('hidden');
+  const title={dashboard:'Tableau de bord',salles:'Salles',tutorials:'Tutoriels',guides:'Guides techniques',plans:'Plans',media:'Médias'}[view];
+  $('#genericTitle').textContent=title;
+
+  if(view==='guides'){
+    $('#pageTitle').textContent=title;
+    renderGuidesManager();
+    return;
+  }
+
+  if(view==='salles'){
+    const groups=data.locations
+      .filter(l=>(l.rooms||[]).length)
+      .map(l=>`
+        <section class="global-group">
+          ${globalGroupHeader(l)}
+          <div class="global-group-grid">
+            ${(l.rooms||[]).map(r=>`
+              <button class="generic-card global-click-card" type="button"
+                data-global-room="${esc(r.id)}" data-global-room-lieu="${esc(l.id)}">
+                <div class="global-card-top">
+                  <h3>${esc(r.name||'Salle sans nom')}</h3>
+                  <span>›</span>
+                </div>
+                <p>${esc([r.floor?`Étage : ${r.floor}`:'', r.directions||''].filter(Boolean).join(' · ')||'Aucun détail renseigné')}</p>
+                ${(r.equipment||[]).length?`<div class="global-mini-chips">${r.equipment.slice(0,4).map(e=>`<span>${esc(e)}</span>`).join('')}${r.equipment.length>4?`<span>+${r.equipment.length-4}</span>`:''}</div>`:''}
+              </button>`).join('')}
+          </div>
+        </section>`).join('');
+
+    $('#genericContent').innerHTML=groups||'<p>Aucune salle enregistrée.</p>';
+    $('#pageTitle').textContent=title;
+  }else if(view==='tutorials'){
+    const groups=data.locations
+      .filter(l=>(l.tutorials||[]).length)
+      .map(l=>`
+        <section class="global-group">
+          ${globalGroupHeader(l)}
+          <div class="global-group-grid">
+            ${(l.tutorials||[]).map((t,i)=>`
+              <button class="generic-card global-click-card" type="button"
+                data-global-tutorial="${i}" data-global-tutorial-lieu="${esc(l.id)}">
+                <div class="global-card-top">
+                  <h3>${esc(t.title||t.name||'Tutoriel')}</h3>
+                  <span>›</span>
+                </div>
+                <p>${t.url?'Lien externe':t.path?'Fichier enregistré':'Tutoriel sans fichier ni lien'}</p>
+              </button>`).join('')}
+          </div>
+        </section>`).join('');
+
+    $('#genericContent').innerHTML=groups||'<p>Aucun tutoriel enregistré.</p>';
+    $('#pageTitle').textContent=title;
+  }else{
+    let items=[];
+    if(view==='dashboard')items=data.locations.map(x=>({h:x.name,p:`${x.rooms?.length||0} salles · ${x.gallery?.length||0} images`}));
+    if(view==='plans')data.locations.forEach(x=>(x.plans||[]).forEach(r=>items.push({h:r.name,p:x.name})));
+    if(view==='media')data.locations.forEach(x=>(x.media||[]).forEach(r=>items.push({h:r.name,p:x.name})));
+    $('#genericContent').innerHTML=items.map(i=>`<div class="generic-card"><h3>${esc(i.h)}</h3><p>${esc(i.p)}</p></div>`).join('')||'<p>Aucune donnée.</p>';
+    $('#pageTitle').textContent=title;
+  }
+
+  $$('[data-global-lieu]').forEach(btn=>btn.onclick=()=>openLieuFromGlobal(btn.dataset.globalLieu,'rooms'));
+  $$('[data-global-room]').forEach(btn=>btn.onclick=()=>openLieuFromGlobal(btn.dataset.globalRoomLieu,'rooms',btn.dataset.globalRoom));
+  $$('[data-global-tutorial]').forEach(btn=>btn.onclick=()=>openLieuFromGlobal(btn.dataset.globalTutorialLieu,'tutorials'));
+}
 
 $$('nav button[data-view]').forEach(b=>b.onclick=()=>{$$('nav button[data-view]').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#lieuxView').classList.add('hidden');$('#genericView').classList.add('hidden');$('#githubView')?.classList.add('hidden');if(b.dataset.view==='lieux'){$('#lieuxView').classList.remove('hidden');$('#pageTitle').textContent='Lieux & Salles';$('#pageSub').textContent='Base de données pour UniPop Go'}else if(b.dataset.view==='github'){$('#githubView').classList.remove('hidden');$('#pageTitle').textContent='Configuration GitHub';$('#pageSub').textContent='Publication de sites.json et des assets';loadCfgUI()}else generic(b.dataset.view)});
 $$('.tabs button').forEach(b=>b.onclick=()=>{$$('.tabs button').forEach(x=>x.classList.remove('active'));$$('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#tab-'+b.dataset.tab).classList.add('active')});
