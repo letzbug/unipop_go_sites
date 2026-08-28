@@ -295,3 +295,18 @@ button:disabled{
     width:100%;
   }
 }
+
+/* v7.4 compact Guides / Plans / Médias */
+body.compact-doc-view #genericContent{display:block}
+body.compact-doc-view .global-group{margin:0 0 8px!important}
+body.compact-doc-view .global-lieu-head-wrap{margin:0!important;grid-template-columns:1fr auto}
+body.compact-doc-view .global-lieu-head{min-height:58px;margin:0!important;padding:9px 13px}
+body.compact-doc-view .global-lieu-head>span{display:flex;align-items:center;gap:9px}
+body.compact-doc-view .global-group-grid{display:none;margin-top:8px}
+body.compact-doc-view .global-group.doc-open .global-group-grid{display:grid}
+body.compact-doc-view .global-empty-card{min-height:52px;padding:10px}
+.doc-count{font-size:11px;color:#91a6ba;font-weight:650}.doc-chevron{font-size:18px;transition:transform .15s}
+.doc-open .doc-chevron{transform:rotate(180deg)}
+.doc-tools{display:flex;justify-content:flex-end;margin:0 0 12px}
+.doc-tools label{display:flex;align-items:center;gap:7px;color:#91a6ba;font-size:12px}.doc-tools input{width:auto}
+@media(max-width:760px){body.compact-doc-view .global-add-btn{width:auto!important;padding:0 10px}.doc-tools{justify-content:flex-start}}

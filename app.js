@@ -679,7 +679,31 @@ function generic(view){
   });
 }
 
-$$('nav button[data-view]').forEach(b=>b.onclick=()=>{$$('nav button[data-view]').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#lieuxView').classList.add('hidden');$('#genericView').classList.add('hidden');$('#githubView')?.classList.add('hidden');if(b.dataset.view==='lieux'){$('#lieuxView').classList.remove('hidden');$('#pageTitle').textContent='Lieux & Salles';$('#pageSub').textContent='Base de données pour UniPop Go'}else if(b.dataset.view==='github'){$('#githubView').classList.remove('hidden');$('#pageTitle').textContent='Configuration GitHub';$('#pageSub').textContent='Publication de sites.json et des assets';loadCfgUI()}else generic(b.dataset.view)});
+
+function compactGlobalDocuments(view){
+  const compact=['guides','plans','media'].includes(view);
+  document.body.classList.toggle('compact-doc-view',compact);
+  if(!compact)return;
+  const content=$('#genericContent');if(!content)return;
+  content.querySelector('.doc-tools')?.remove();
+  const tools=document.createElement('div');tools.className='doc-tools';
+  tools.innerHTML='<label><input id="docOnlyContent" type="checkbox"> Avec contenu uniquement</label>';
+  content.prepend(tools);
+  $$('.global-group').forEach(group=>{
+    const lieuBtn=group.querySelector('[data-global-lieu]');if(!lieuBtn)return;
+    const lieu=data.locations.find(l=>String(l.id)===String(lieuBtn.dataset.globalLieu));
+    let count=0;
+    if(view==='plans')count=(lieu?.plans||[]).length;
+    if(view==='media')count=(lieu?.media||[]).length;
+    if(view==='guides'){if(lieu?.guideId)count++;(lieu?.rooms||[]).forEach(r=>{if(r.guideId)count++})}
+    group.dataset.docCount=count;
+    const rhs=lieuBtn.querySelector(':scope > span');
+    if(rhs){const word=view==='guides'?'guide':view==='plans'?'document':'média';rhs.innerHTML=`<span class="doc-count">${count} ${word}${count===1?'':'s'}</span><span class="doc-chevron">⌄</span>`}
+    lieuBtn.onclick=e=>{e.preventDefault();const opening=!group.classList.contains('doc-open');$$('.global-group.doc-open').forEach(g=>g.classList.remove('doc-open'));if(opening)group.classList.add('doc-open')};
+  });
+  $('#docOnlyContent')?.addEventListener('change',e=>$$('.global-group').forEach(g=>g.classList.toggle('hidden',e.target.checked&&Number(g.dataset.docCount||0)===0)));
+}
+$$('nav button[data-view]').forEach(b=>b.onclick=()=>{$$('nav button[data-view]').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#lieuxView').classList.add('hidden');$('#genericView').classList.add('hidden');$('#githubView')?.classList.add('hidden');if(b.dataset.view==='lieux'){$('#lieuxView').classList.remove('hidden');$('#pageTitle').textContent='Lieux & Salles';$('#pageSub').textContent='Base de données pour UniPop Go'}else if(b.dataset.view==='github'){$('#githubView').classList.remove('hidden');$('#pageTitle').textContent='Configuration GitHub';$('#pageSub').textContent='Publication de sites.json et des assets';loadCfgUI()}else {generic(b.dataset.view);compactGlobalDocuments(b.dataset.view)}});
 $$('.tabs button').forEach(b=>b.onclick=()=>{$$('.tabs button').forEach(x=>x.classList.remove('active'));$$('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('#tab-'+b.dataset.tab).classList.add('active')});
 $('#search').oninput=e=>renderList(e.target.value);
 $('#roomSearch').oninput=()=>renderRooms();$('#saveBtn').onclick=()=>{saveData();renderList($('#search').value);fill()};$('#addLieu').onclick=()=>{if(current())saveData('');const x=newLocation();data.locations.unshift(x);currentId=x.id;persistData('Nouveau lieu créé');$('#search').value='';$('#lieuxView').classList.remove('focus-list');renderList();fill();document.querySelector('[data-field="name"]')?.focus()};$('#backToList').onclick=()=>{if(current())saveData('');$('#search').value='';renderList();$('#lieuxView').classList.add('focus-list');document.querySelector('.locations')?.scrollIntoView({behavior:'smooth',block:'start'})};
