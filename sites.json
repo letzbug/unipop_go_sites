@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-01T11:49:47.558Z",
+  "updatedAt": "2026-09-01T11:53:43.505Z",
   "locations": [
     {
       "id": "lieu-1787831332536",
@@ -369,14 +369,7 @@
             "Whiteboard"
           ],
           "hero": "assets/belval-2/rooms/salle-1786968691594/hero.webp",
-          "gallery": [
-            {
-              "path": "assets/belval-2/rooms/salle-1786968691594/gallery/1786968712183-salle-101.webp",
-              "name": "Salle_101.jpg",
-              "type": "image/webp",
-              "size": 30618
-            }
-          ],
+          "gallery": [],
           "guideId": ""
         }
       ],
