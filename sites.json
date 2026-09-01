@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-08-27T12:08:40.130Z",
+  "updatedAt": "2026-09-01T11:39:58.260Z",
   "locations": [
     {
       "id": "lieu-1787831332536",
@@ -287,7 +287,16 @@
       ],
       "media": [],
       "plans": [],
-      "tutorials": [],
+      "tutorials": [
+        {
+          "title": "Optoma Touchscreen",
+          "url": "",
+          "path": "assets/lieu-1786968909332/tutorials/1788262533845-tutoriel-optoma.webp",
+          "name": "Tutoriel Optoma .png",
+          "type": "image/webp",
+          "size": 105016
+        }
+      ],
       "rooms": [
         {
           "id": "salle-1786969287616",
