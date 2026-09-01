@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-01T11:39:58.260Z",
+  "updatedAt": "2026-09-01T11:47:24.062Z",
   "locations": [
     {
       "id": "lieu-1787831332536",
@@ -328,12 +328,12 @@
             "Soundbar",
             "PC"
           ],
-          "hero": "",
+          "hero": "assets/lieu-1786968909332/rooms/salle-1787121551271/hero.webp",
           "gallery": [],
-          "guideId": ""
+          "guideId": "guide-1787204081117"
         }
       ],
-      "guideId": ""
+      "guideId": "guide-1787204081117"
     },
     {
       "id": "belval-2",
