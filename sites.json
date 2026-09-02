@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-02T05:36:10.379Z",
+  "updatedAt": "2026-09-02T05:37:40.419Z",
   "locations": [
     {
       "id": "lieu-1787831332536",
@@ -249,6 +249,92 @@
       "plans": [],
       "tutorials": [],
       "rooms": [],
+      "guideId": ""
+    },
+    {
+      "id": "lieu-1786968909332",
+      "name": "IFEN (Bâtiment E)",
+      "aliases": [],
+      "address": "3 rue de la fonte\nL-4364 Esch-sur-Alzette",
+      "description": "Sonnez au tourniquet si vous n'avez pas de badge",
+      "lat": 49.503264,
+      "lng": 5.948238,
+      "website": "www.ifen.lu",
+      "phone": "+352 621 596 143",
+      "email": "gaspard.ngonokele@ifen.lu",
+      "parking": "Parking Université",
+      "parkingInfo": "A environ 5 minutes à pied.",
+      "transport": "Gare Belval-Université",
+      "transportInfo": "Train et lignes de bus à proximité.",
+      "accessInfo": "Entrée tourniquet / Sonnez -> Ifen",
+      "pmr": true,
+      "active": true,
+      "hero": "assets/lieu-1786968909332/hero.webp",
+      "heroThumb": "assets/lieu-1786968909332/thumb.webp",
+      "gallery": [
+        {
+          "path": "assets/lieu-1786968909332/gallery/1786969272982-ifen-garde.webp",
+          "name": "Ifen_garde.jpg",
+          "type": "image/webp",
+          "size": 172980
+        },
+        {
+          "path": "assets/lieu-1786968909332/gallery/1786969279588-ifen-entree.webp",
+          "name": "Ifen_entree.jpg",
+          "type": "image/webp",
+          "size": 68426
+        }
+      ],
+      "media": [],
+      "plans": [],
+      "tutorials": [
+        {
+          "title": "Nouveau tutoriel",
+          "url": "",
+          "path": "assets/lieu-1786968909332/tutorials/1788325874230-tutoriel-optoma.webp",
+          "name": "Tutoriel Optoma .png",
+          "type": "image/webp",
+          "size": 105016
+        }
+      ],
+      "rooms": [
+        {
+          "id": "salle-1786969287616",
+          "name": "Salle Yoga (Salle 2)",
+          "aliases": [],
+          "floor": "rez-de-chaussée",
+          "description": "",
+          "directions": "Couloir principal",
+          "equipment": [
+            "Ecran Optoma 86 pouces",
+            "Apple TV",
+            "Soundbar",
+            "PC"
+          ],
+          "hero": "assets/lieu-1786968909332/rooms/salle-1786969287616/hero.webp",
+          "gallery": [],
+          "guideId": "guide-1787204081117",
+          "tutorialGuidePath": ""
+        },
+        {
+          "id": "salle-1787121551271",
+          "name": "Salle de Musique",
+          "aliases": [],
+          "floor": "rez-de-chaussée",
+          "description": "",
+          "directions": "Couloir à gauche",
+          "equipment": [
+            "Ecran Optoma 86 pouces",
+            "Apple TV",
+            "Soundbar",
+            "PC"
+          ],
+          "hero": "assets/lieu-1786968909332/rooms/salle-1787121551271/hero.webp",
+          "gallery": [],
+          "guideId": "",
+          "tutorialGuidePath": "assets/lieu-1786968909332/tutorials/1788325874230-tutoriel-optoma.webp"
+        }
+      ],
       "guideId": ""
     },
     {
