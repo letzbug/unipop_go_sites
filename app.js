@@ -1,4 +1,4 @@
-const APP_VERSION='7.0.0';
+const APP_VERSION='7.0.1';
 const APP_CACHE_PREFIXES=['unipop-sites-','unipop-go-sites-','unipop-go-'];
 
 async function cleanupLegacyAppCaches(){
@@ -127,7 +127,45 @@ async function removeAsset(path){await dbDelete(path);if(objectUrls.has(path)){U
 async function renderGallery(){const x=current();$('#gallery').innerHTML=(x.gallery||[]).map((g,i)=>`<div class="thumb"><img data-path="${esc(g.path)}"><button data-g="${i}">×</button></div>`).join('');for(const img of $$('#gallery [data-path]'))img.src=await previewUrl(img.dataset.path);$$('[data-g]').forEach(b=>b.onclick=async()=>{const g=x.gallery.splice(+b.dataset.g,1)[0];await removeAsset(g?.path);saveData();renderGallery()})}
 async function renderMedia(){const x=current();$('#mediaGrid').innerHTML=(x.media||[]).map((m,i)=>`<div class="media-card">${m.type?.startsWith('image')?`<img data-path="${esc(m.path)}">`:'<div class="fileicon">▧</div>'}<button data-m="${i}">×</button><b>${esc(m.name)}</b><small>${esc(bytesText(m.size||0))}</small></div>`).join('')||'<p>Aucun média.</p>';for(const img of $$('#mediaGrid [data-path]'))img.src=await previewUrl(img.dataset.path);$$('[data-m]').forEach(b=>b.onclick=async()=>{const m=x.media.splice(+b.dataset.m,1)[0];await removeAsset(m?.path);saveData();renderMedia()})}
 function renderPlans(){const x=current();$('#planGrid').innerHTML=(x.plans||[]).map((m,i)=>`<div class="file-card"><button data-p="${i}">×</button><b>▱ ${esc(m.name)}</b><p>${esc(m.type||'document')} · ${esc(bytesText(m.size||0))}</p></div>`).join('')||'<p>Aucun plan.</p>';$$('[data-p]').forEach(b=>b.onclick=async()=>{const m=x.plans.splice(+b.dataset.p,1)[0];await removeAsset(m?.path);saveData();renderPlans()})}
-function renderTuts(){const x=current();$('#tutList').innerHTML=(x.tutorials||[]).map((t,i)=>`<div class="tutorial-row"><input value="${esc(t.title||'')}" data-ti="${i}" placeholder="Titre"><input value="${esc(t.url||'')}" data-tu="${i}" placeholder="URL externe (optionnel)"><label class="ghost small upload-inline">${t.path?'Remplacer fichier':'Ajouter fichier'}<input type="file" data-tf="${i}" hidden></label><button class="danger small" data-td="${i}">×</button>${t.path?`<small class="assetpath">${esc(t.path)}</small>`:''}</div>`).join('')||'<p>Aucun tutoriel.</p>';$$('[data-ti]').forEach(e=>e.oninput=()=>x.tutorials[+e.dataset.ti].title=e.value);$$('[data-tu]').forEach(e=>e.oninput=()=>x.tutorials[+e.dataset.tu].url=e.value);$$('[data-tf]').forEach(e=>e.onchange=async()=>{const f=e.files[0];if(!f)return;const t=x.tutorials[+e.dataset.tf];if(t.path)await removeAsset(t.path);const rec=await storeFile(f,uniquePath(`assets/${slug(x.id||x.name)}/tutorials`,f,f.type.startsWith('image/')),f.type.startsWith('image/'));Object.assign(t,rec);saveData('Tutoriel ajouté');renderTuts()});$$('[data-td]').forEach(e=>e.onclick=async()=>{const t=x.tutorials.splice(+e.dataset.td,1)[0];if(t?.path)await removeAsset(t.path);saveData();renderTuts()})}
+async function blobsEqual(a,b){
+  if(!a||!b||a.size!==b.size||a.type!==b.type)return false;
+  try{
+    const [ha,hb]=await Promise.all([a.arrayBuffer(),b.arrayBuffer()]);
+    const [da,db]=await Promise.all([crypto.subtle.digest('SHA-256',ha),crypto.subtle.digest('SHA-256',hb)]);
+    const va=new Uint8Array(da),vb=new Uint8Array(db);
+    return va.length===vb.length&&va.every((v,i)=>v===vb[i]);
+  }catch{return false}
+}
+
+function renderTuts(){const x=current();$('#tutList').innerHTML=(x.tutorials||[]).map((t,i)=>`<div class="tutorial-row"><input value="${esc(t.title||'')}" data-ti="${i}" placeholder="Titre"><input value="${esc(t.url||'')}" data-tu="${i}" placeholder="URL externe (optionnel)"><label class="ghost small upload-inline">${t.path?'Remplacer fichier':'Ajouter fichier'}<input type="file" data-tf="${i}" hidden></label><button class="danger small" data-td="${i}">×</button>${t.path?`<small class="assetpath">${esc(t.path)}</small>`:''}</div>`).join('')||'<p>Aucun tutoriel.</p>';$$('[data-ti]').forEach(e=>e.oninput=()=>x.tutorials[+e.dataset.ti].title=e.value);$$('[data-tu]').forEach(e=>e.oninput=()=>x.tutorials[+e.dataset.tu].url=e.value);$$('[data-tf]').forEach(e=>e.onchange=async()=>{
+  const f=e.files[0];if(!f)return;
+  const t=x.tutorials[+e.dataset.tf];
+  const oldPath=t.path||'';
+  const oldRec=oldPath?await dbGet(oldPath):null;
+  const optimize=f.type.startsWith('image/');
+  const newPath=uniquePath(`assets/${slug(x.id||x.name)}/tutorials`,f,optimize);
+  try{
+    // Transactional replacement: save and verify the new file first. The old
+    // tutorial is only removed after the new asset is safely stored.
+    const rec=await storeFile(f,newPath,optimize);
+    const newRec=await dbGet(newPath);
+    if(oldRec?.blob&&newRec?.blob&&await blobsEqual(oldRec.blob,newRec.blob)){
+      await removeAsset(newPath);
+      alert('Le fichier sélectionné est identique au tutoriel actuel. L’ancien fichier a été conservé.');
+      return;
+    }
+    Object.assign(t,rec);
+    saveData(oldPath?'Tutoriel remplacé':'Tutoriel ajouté');
+    if(oldPath&&oldPath!==newPath)await removeAsset(oldPath);
+    renderTuts();
+  }catch(err){
+    console.error('Tutoriel upload:',err);
+    if(newPath!==oldPath)await removeAsset(newPath).catch(()=>{});
+    alert('Le nouveau tutoriel n’a pas pu être enregistré. L’ancien fichier a été conservé.');
+  }finally{
+    e.value='';
+  }
+});$$('[data-td]').forEach(e=>e.onclick=async()=>{const t=x.tutorials.splice(+e.dataset.td,1)[0];if(t?.path)await removeAsset(t.path);saveData();renderTuts()})}
 
 function guideOptions(selected=''){
   return `<option value="">Aucun guide technique</option>`+(data.guides||[]).map(g=>`<option value="${esc(g.id)}" ${String(g.id)===String(selected)?'selected':''}>${esc(g.title||'Guide sans titre')}</option>`).join('');
