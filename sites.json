@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-02T05:41:06.672Z",
+  "updatedAt": "2026-09-02T05:49:38.837Z",
   "locations": [
     {
       "id": "lieu-1787831332536",
@@ -287,16 +287,7 @@
       ],
       "media": [],
       "plans": [],
-      "tutorials": [
-        {
-          "title": "Nouveau tutoriel",
-          "url": "",
-          "path": "assets/lieu-1786968909332/tutorials/1788325874230-tutoriel-optoma.webp",
-          "name": "Tutoriel Optoma .png",
-          "type": "image/webp",
-          "size": 105016
-        }
-      ],
+      "tutorials": [],
       "rooms": [
         {
           "id": "salle-1786969287616",
@@ -331,8 +322,8 @@
           ],
           "hero": "assets/lieu-1786968909332/rooms/salle-1787121551271/hero.webp",
           "gallery": [],
-          "guideId": "",
-          "tutorialGuidePath": "assets/lieu-1786968909332/tutorials/1788325874230-tutoriel-optoma.webp"
+          "guideId": "guide-1787204081117",
+          "tutorialGuidePath": ""
         }
       ],
       "guideId": ""
@@ -390,13 +381,13 @@
   "guides": [
     {
       "id": "guide-1787204081117",
-      "title": "OPTOMA TOUCHSCREEN",
+      "title": "OPTOMA LCD Screen",
       "description": "Optoma Screen",
       "url": "",
-      "path": "assets/guides/1787204409424-salle-prince-henri.pdf",
-      "name": "Salle Prince Henri.pdf",
-      "type": "application/pdf",
-      "size": 3254581
+      "path": "assets/guides/1788328121221-tutoriel-optoma.webp",
+      "name": "Tutoriel Optoma .png",
+      "type": "image/webp",
+      "size": 105016
     }
   ]
 }
