@@ -570,7 +570,7 @@ function generic(view){
   $('#lieuxView').classList.add('hidden');
   $('#githubView')?.classList.add('hidden');
   $('#genericView').classList.remove('hidden');
-  const title={dashboard:'Tableau de bord',salles:'Salles',tutorials:'Tutoriels',guides:'Guides techniques',plans:'Plans',media:'Médias'}[view];
+  const title={dashboard:'Tableau de bord',salles:'Salles',tutorials:'Infos pratiques',guides:'Guides techniques',plans:'Plans',media:'Médias'}[view];
   $('#genericTitle').textContent=title;
 
   if(view==='salles'){
@@ -606,7 +606,7 @@ function generic(view){
               </button>`).join('')}
           </div>
         </section>`).join('');
-    $('#genericContent').innerHTML=groups||'<p>Aucun tutoriel enregistré.</p>';
+    $('#genericContent').innerHTML=groups||'<p>Aucune information pratique enregistrée.</p>';
     $('#pageTitle').textContent=title;
   }else if(view==='plans'){
     const groups=data.locations.map(l=>`
