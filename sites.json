@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-02T05:01:21.152Z",
+  "updatedAt": "2026-09-02T05:11:19.063Z",
   "locations": [
     {
       "id": "lieu-1787831332536",
@@ -291,7 +291,7 @@
         {
           "title": "Nouveau tutoriel",
           "url": "",
-          "path": "assets/lieu-1786968909332/tutorials/1788325274157-tutoriel-optoma.webp",
+          "path": "assets/lieu-1786968909332/tutorials/1788325874230-tutoriel-optoma.webp",
           "name": "Tutoriel Optoma .png",
           "type": "image/webp",
           "size": 105016
