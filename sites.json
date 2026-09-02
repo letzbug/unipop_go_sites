@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-02T05:21:18.183Z",
+  "updatedAt": "2026-09-02T05:32:19.329Z",
   "locations": [
     {
       "id": "lieu-1787831332536",
@@ -313,7 +313,8 @@
           ],
           "hero": "assets/lieu-1786968909332/rooms/salle-1786969287616/hero.webp",
           "gallery": [],
-          "guideId": "guide-1787204081117"
+          "guideId": "guide-1787204081117",
+          "tutorialGuidePath": ""
         },
         {
           "id": "salle-1787121551271",
@@ -333,7 +334,7 @@
           "guideId": "guide-1787204081117"
         }
       ],
-      "guideId": "guide-1787204081117"
+      "guideId": ""
     },
     {
       "id": "belval-2",
