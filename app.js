@@ -141,9 +141,17 @@ function renderGuideSelects(){
   const x=current();if(!x)return;
   const sel=$('#lieuGuideSelect');if(sel){sel.innerHTML=guideOptions(x.guideId||'');sel.value=x.guideId||'';sel.onchange=()=>{x.guideId=sel.value;persistData('Guide technique du lieu mis à jour')}}
 }
-async function renderGuidesManager(){
+async function renderGuidesManager(showBack=false){
   data.guides=data.guides||[];
-  $('#genericContent').innerHTML=`<div class="guide-manager"><div class="sectiontitle"><div><h3>Guides techniques</h3><p>Créez les guides une fois, puis attribuez-les aux lieux ou aux salles.</p></div><button class="primary" id="addGuideGlobal">＋ Ajouter un guide</button></div><div id="guideRows" class="guide-list"></div></div>`;
+  $('#genericContent').innerHTML=`<div class="guide-manager">
+    ${showBack?'<button class="ghost small" id="backToGuideOverview" type="button">← Retour à la liste des lieux</button>':''}
+    <div class="sectiontitle">
+      <div><h3>Guides techniques</h3><p>Créez les guides une fois, chargez ou remplacez leur fichier, puis attribuez-les aux lieux ou aux salles.</p></div>
+      <button class="primary" id="addGuideGlobal">＋ Ajouter un guide</button>
+    </div>
+    <div id="guideRows" class="guide-list"></div>
+  </div>`;
+  $('#backToGuideOverview')?.addEventListener('click',()=>{generic('guides');compactGlobalDocuments('guides')});
   const rows=$('#guideRows');
   const draw=()=>{
     rows.innerHTML=(data.guides||[]).map((g,i)=>`<article class="guide-card"><div class="guide-card-head"><input value="${esc(g.title||'')}" data-gtitle="${i}" placeholder="Titre du guide"><button class="danger small" data-gdel="${i}">Supprimer</button></div><textarea data-gdesc="${i}" placeholder="Description courte (optionnel)">${esc(g.description||'')}</textarea><input value="${esc(g.url||'')}" data-gurl="${i}" placeholder="URL externe (optionnel)"><div class="guide-actions"><label class="ghost small upload-inline">${g.path?'Remplacer le fichier':'Ajouter un fichier'}<input type="file" data-gfile="${i}" hidden></label>${g.path?`<small class="assetpath">${esc(g.path)}</small>`:''}</div></article>`).join('')||'<p>Aucun guide technique. Cliquez sur « Ajouter un guide ».</p>';
@@ -635,17 +643,29 @@ function generic(view){
     $('#genericContent').innerHTML=groups||'<p>Aucun lieu enregistré.</p>';
     $('#pageTitle').textContent=title;
   }else if(view==='guides'){
+    const libraryBar=`<div class="sectiontitle guide-global-toolbar">
+      <div>
+        <h3>Bibliothèque des guides techniques</h3>
+        <p>Ajoutez ou remplacez les fichiers ici, puis attribuez-les aux lieux ou aux salles.</p>
+      </div>
+      <button class="primary" id="openGuideLibrary" type="button">＋ Gérer / ajouter un guide</button>
+    </div>`;
     const groups=data.locations.map(l=>{
       const assigned=[];
       if(l.guideId){
         assigned.push({scope:'Lieu',title:guideTitleById(l.guideId)});
       }
       (l.rooms||[]).forEach(r=>{
-        if(r.guideId)assigned.push({scope:r.name||'Salle',title:guideTitleById(r.guideId)});
+        if(r.tutorialGuidePath){
+          const t=(l.tutorials||[]).find(x=>String(x.path||x.url)===String(r.tutorialGuidePath));
+          assigned.push({scope:r.name||'Salle',title:`Tutoriel — ${t?.title||t?.name||'Tutoriel'}`});
+        }else if(r.guideId){
+          assigned.push({scope:r.name||'Salle',title:guideTitleById(r.guideId)});
+        }
       });
       return `
         <section class="global-group">
-          ${globalGroupHeader(l,'Attribuer / ajouter',`data-global-add-guide="${esc(l.id)}"`)}
+          ${globalGroupHeader(l,'Attribuer',`data-global-add-guide="${esc(l.id)}"`)}
           <div class="global-group-grid">
             ${assigned.length
               ? assigned.map(g=>`
@@ -657,8 +677,9 @@ function generic(view){
           </div>
         </section>`;
     }).join('');
-    $('#genericContent').innerHTML=groups||'<p>Aucun lieu enregistré.</p>';
+    $('#genericContent').innerHTML=libraryBar+(groups||'<p>Aucun lieu enregistré.</p>');
     $('#pageTitle').textContent=title;
+    $('#openGuideLibrary')?.addEventListener('click',()=>renderGuidesManager(true));
   }else{
     let items=[];
     if(view==='dashboard')items=data.locations.map(x=>({h:x.name,p:`${x.rooms?.length||0} salles · ${x.gallery?.length||0} images`}));
