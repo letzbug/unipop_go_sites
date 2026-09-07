@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-07T08:05:39.534Z",
+  "updatedAt": "2026-09-07T08:19:32.158Z",
   "locations": [
     {
       "id": "lieu-1787831332536",
@@ -165,7 +165,25 @@
       "media": [],
       "plans": [],
       "tutorials": [],
-      "rooms": [],
+      "rooms": [
+        {
+          "id": "salle-1788769038322",
+          "name": "Grande Salle",
+          "aliases": [],
+          "floor": "0",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Projecteur Panasonic",
+            "apple TV",
+            "PC formateur (ifen / ifen)",
+            "Micro + Haut Parleurs"
+          ],
+          "guideId": "",
+          "hero": "assets/lieu-1787124120119/rooms/salle-1788769038322/hero.webp",
+          "gallery": []
+        }
+      ],
       "guideId": ""
     },
     {
