@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-02T05:52:34.535Z",
+  "updatedAt": "2026-09-07T08:05:39.534Z",
   "locations": [
     {
       "id": "lieu-1787831332536",
@@ -343,27 +343,196 @@
       "active": true,
       "hero": "assets/belval/hero.webp",
       "heroThumb": "assets/belval/thumb.webp",
-      "gallery": [],
+      "gallery": [
+        {
+          "path": "assets/belval-2/gallery/1788764431847-ascenseur.webp",
+          "name": "Ascenseur.jpg",
+          "type": "image/webp",
+          "size": 68256
+        },
+        {
+          "path": "assets/belval-2/gallery/1788764449846-escalator.webp",
+          "name": "Escalator.jpg",
+          "type": "image/webp",
+          "size": 90690
+        }
+      ],
       "media": [],
       "plans": [],
       "tutorials": [],
       "rooms": [
         {
           "id": "salle-1786968691594",
-          "name": "Salle 1.02 (Etage 1, salle 2)",
+          "name": "C1.03.07",
           "aliases": [],
           "floor": "1",
           "description": "",
           "directions": "Prendre l'escalator de l'Atrium",
           "equipment": [
-            "Projecteur",
-            "HDMI",
-            "Apple TV",
-            "Whiteboard"
+            "Salle artistique",
+            "écran Optoma 86\"",
+            "PC formateur (SFA / SFA)"
           ],
           "hero": "assets/belval-2/rooms/salle-1786968691594/hero.webp",
           "gallery": [],
-          "guideId": ""
+          "guideId": "guide-1787204081117",
+          "tutorialGuidePath": ""
+        },
+        {
+          "id": "salle-1788763819150",
+          "name": "C2.06.03",
+          "aliases": [],
+          "floor": "6",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Ecran ILYAMA 86\"",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "",
+          "hero": "assets/belval-2/rooms/salle-1788763819150/hero.webp",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788764083810",
+          "name": "C2.06.04",
+          "aliases": [],
+          "floor": "6",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Ecran ILYAMA 86\"",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "",
+          "hero": "assets/belval-2/rooms/salle-1788764083810/hero.webp",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788764211646",
+          "name": "C2.06.02",
+          "aliases": [],
+          "floor": "6",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Ecran ILYAMA 86\"",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "",
+          "hero": "assets/belval-2/rooms/salle-1788764211646/hero.webp",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788764259139",
+          "name": "C2.06.01",
+          "aliases": [],
+          "floor": "6",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Ecran ILYAMA 86\"",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "",
+          "hero": "assets/belval-2/rooms/salle-1788764259139/hero.webp",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788767349321",
+          "name": "C1.01.13",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "Escalator -> droite ",
+          "equipment": [
+            "Projecteur Epson EB585wi",
+            "Airserver",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "",
+          "hero": "assets/belval-2/rooms/salle-1788767349321/hero.webp",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788767613255",
+          "name": "C1.01.14A",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "Escalator -> droite",
+          "equipment": [
+            "Projecteur Epson EB585wi",
+            "Airserver",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "",
+          "hero": "assets/belval-2/rooms/salle-1788767613255/hero.webp",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788768009475",
+          "name": "C1.01.06",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "Escalator -> droite",
+          "equipment": [
+            "Projecteur Epson EB585wi",
+            "Airserver",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "",
+          "hero": "assets/belval-2/rooms/salle-1788768009475/hero.webp",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788768078612",
+          "name": "C1.01.08",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "Escalator -> droite",
+          "equipment": [
+            "Projecteur Epson EB585wi",
+            "Airserver",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "",
+          "hero": "assets/belval-2/rooms/salle-1788768078612/hero.webp",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788768121216",
+          "name": "C1.01.07",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "Escalator droite",
+          "equipment": [
+            "Projecteur Epson EB585wi",
+            "Airserver",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "",
+          "hero": "assets/belval-2/rooms/salle-1788768121216/hero.webp",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788768176892",
+          "name": "C1.01.09",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "Escalator droite",
+          "equipment": [
+            "Projecteur Epson EB585wi",
+            "Airserver",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "",
+          "hero": "assets/belval-2/rooms/salle-1788768176892/hero.webp",
+          "gallery": []
         }
       ],
       "website": "https://www.unipop.lu",
@@ -388,6 +557,16 @@
       "name": "Tutoriel Optoma .png",
       "type": "image/webp",
       "size": 105016
+    },
+    {
+      "id": "guide-1788334934373",
+      "title": "Epson EB585W Projector",
+      "description": "Projecteur data/vidéo",
+      "url": "",
+      "path": "assets/guides/1788335050980-tutoriel-epson-eb585w.webp",
+      "name": "Tutoriel Epson EB585W.jpg",
+      "type": "image/webp",
+      "size": 56968
     }
   ]
 }
