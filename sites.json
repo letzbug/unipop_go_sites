@@ -1,7 +1,199 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-07T08:19:32.158Z",
+  "updatedAt": "2026-09-09T07:58:24.270Z",
   "locations": [
+    {
+      "id": "lieu-1788771487307",
+      "name": "Ecole Internationale Gaston Thorn",
+      "aliases": [
+        "Blumm"
+      ],
+      "address": "École internationale Gaston Thorn\n17, rue Marguerite de Brabant\nL-1254 Luxembourg-Merl",
+      "description": "",
+      "lat": 49.603549,
+      "lng": 6.10964,
+      "website": "https://www.eigt.lu",
+      "phone": "Telefon: 2604-6101",
+      "email": "secretariat-SE@eigt.lu",
+      "parking": "",
+      "parkingInfo": "",
+      "transport": "Merl, Geesseknäppchen (N)",
+      "transportInfo": "D25, D28, D30, D31, D32, D33, D51, D55",
+      "accessInfo": "",
+      "pmr": false,
+      "active": true,
+      "guideId": "",
+      "hero": "assets/lieu-1788771487307/hero.webp",
+      "heroThumb": "assets/lieu-1788771487307/thumb.webp",
+      "gallery": [],
+      "media": [],
+      "plans": [],
+      "tutorials": [],
+      "rooms": [
+        {
+          "id": "salle-1788779106935",
+          "name": "D1.02",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Projecteur",
+            "apple TV"
+          ],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788779141987",
+          "name": "D1.03",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Projecteur",
+            "apple TV"
+          ],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788779184346",
+          "name": "D1.04",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Projecteur",
+            "apple TV"
+          ],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788779204535",
+          "name": "D1.05",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Projecteur",
+            "apple TV"
+          ],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788779221744",
+          "name": "D1.06",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Projecteur",
+            "apple TV"
+          ],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788779237850",
+          "name": "D1.08",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Projecteur",
+            "apple TV"
+          ],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788780690238",
+          "name": "D1.09",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Projecteur",
+            "apple TV"
+          ],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788780785046",
+          "name": "D1.10",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Projecteur",
+            "apple TV"
+          ],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788780979982",
+          "name": "D1.11",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Projecteur",
+            "apple TV"
+          ],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781029875",
+          "name": "D1.12",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Projecteur",
+            "apple TV"
+          ],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781058896",
+          "name": "Cuisine ENAD",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        }
+      ]
+    },
     {
       "id": "lieu-1787831332536",
       "name": "UniPop Ettelbrück",
@@ -46,8 +238,8 @@
       "email": "secretariat@lnbd.lu",
       "parking": "",
       "parkingInfo": "",
-      "transport": "",
-      "transportInfo": "",
+      "transport": "Lycée Nic Biever",
+      "transportInfo": "J18, J19, N02, N03, N08, X01, X02, X03, X04, X05, X06, X07, CB DU10",
       "accessInfo": "",
       "pmr": false,
       "active": true,
@@ -58,7 +250,116 @@
       "media": [],
       "plans": [],
       "tutorials": [],
-      "rooms": []
+      "rooms": [
+        {
+          "id": "salle-1788781097282",
+          "name": "ATPOL",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781111584",
+          "name": "ATBOIS",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781127075",
+          "name": "INFOTP",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781139695",
+          "name": "INFO1",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781150806",
+          "name": "INFO2",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781162650",
+          "name": "INFO3",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781178169",
+          "name": "INFO4",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781196892",
+          "name": "Cuisine 1",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781206779",
+          "name": "Cuisine 2",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        }
+      ]
     },
     {
       "id": "lieu-1787125421299",
@@ -73,8 +374,8 @@
       "email": "secretariat.ettelbruck@cnfpc.lu ",
       "parking": "",
       "parkingInfo": "",
-      "transport": "",
-      "transportInfo": "",
+      "transport": "Ettelbrueck CNFPC",
+      "transportInfo": "117, 118, K32, CB ET1",
       "accessInfo": "",
       "pmr": false,
       "active": true,
@@ -84,12 +385,37 @@
       "media": [],
       "plans": [],
       "tutorials": [],
-      "rooms": [],
+      "rooms": [
+        {
+          "id": "salle-1788781244282",
+          "name": "APCOU",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781257749",
+          "name": "E102",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        }
+      ],
       "guideId": ""
     },
     {
       "id": "lieu-1787125414802",
-      "name": "CNFPC-Belval",
+      "name": "CNFPC-Esch",
       "aliases": [],
       "address": "1, Charles-de-Gaulle\nL - 4083 Esch-sur-Alzette",
       "description": "",
@@ -111,7 +437,68 @@
       "media": [],
       "plans": [],
       "tutorials": [],
-      "rooms": [],
+      "rooms": [
+        {
+          "id": "salle-1788781304024",
+          "name": "Ferronerie",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781314136",
+          "name": "Bois",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781321794",
+          "name": "Couture",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781351487",
+          "name": "Cuisine 1",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781361865",
+          "name": "Cuisine 2",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        }
+      ],
       "guideId": ""
     },
     {
@@ -127,8 +514,8 @@
       "email": "secretariat.esch@cnfpc.lu ",
       "parking": "",
       "parkingInfo": "",
-      "transport": "",
-      "transportInfo": "",
+      "transport": "Esch-sur-Alzette, Lycée Guillaume Kroll",
+      "transportInfo": "J02, J03, J04, J10, J13, J16, N01, Q01, Q02, Q06, Q07, Q10",
       "accessInfo": "",
       "pmr": false,
       "active": true,
@@ -138,7 +525,68 @@
       "media": [],
       "plans": [],
       "tutorials": [],
-      "rooms": [],
+      "rooms": [
+        {
+          "id": "salle-1788781393534",
+          "name": "Hall 1",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781403670",
+          "name": "Hall 2",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781413830",
+          "name": "Hall 3",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781425753",
+          "name": "Hall 4",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781443497",
+          "name": "Couture",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        }
+      ],
       "guideId": ""
     },
     {
@@ -172,7 +620,7 @@
           "aliases": [],
           "floor": "0",
           "description": "",
-          "directions": "",
+          "directions": "Entrée Batiment D -> à gauche -> entrée IFEN",
           "equipment": [
             "Projecteur Panasonic",
             "apple TV",
@@ -210,7 +658,56 @@
       "media": [],
       "plans": [],
       "tutorials": [],
-      "rooms": [],
+      "rooms": [
+        {
+          "id": "salle-1788781465321",
+          "name": "Sport",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "assets/lieu-1787123499797/rooms/salle-1788781465321/hero.webp",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781477022",
+          "name": "Cuisine",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "assets/lieu-1787123499797/rooms/salle-1788781477022/hero.webp",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781484340",
+          "name": "Artistique 2",
+          "aliases": [],
+          "floor": "2",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "assets/lieu-1787123499797/rooms/salle-1788781484340/hero.webp",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788940648530",
+          "name": "Artistique 1",
+          "aliases": [],
+          "floor": "2",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "assets/lieu-1787123499797/rooms/salle-1788940648530/hero.webp",
+          "gallery": []
+        }
+      ],
       "guideId": ""
     },
     {
@@ -228,8 +725,8 @@
       "email": "secretariat@bll.lu",
       "parking": "",
       "parkingInfo": "",
-      "transport": "",
-      "transportInfo": "",
+      "transport": "Bonnevoie, Lycée Technique de Bonnevoie/Quais",
+      "transportInfo": "2, 3, 5, 23, 33, 74, 97, CN3, CN8",
       "accessInfo": "",
       "pmr": false,
       "active": true,
@@ -239,7 +736,92 @@
       "media": [],
       "plans": [],
       "tutorials": [],
-      "rooms": [],
+      "rooms": [
+        {
+          "id": "salle-1788781522623",
+          "name": "P001 ART1",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781538485",
+          "name": "P002 ART2",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781551053",
+          "name": "Bois",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781562798",
+          "name": "Métal",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781571359",
+          "name": "HAB1",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781588663",
+          "name": "HAB2",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781607865",
+          "name": "Sport",
+          "aliases": [],
+          "floor": "",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        }
+      ],
       "guideId": ""
     },
     {
@@ -255,8 +837,8 @@
       "email": "info@ecg.lu",
       "parking": "",
       "parkingInfo": "",
-      "transport": "",
-      "transportInfo": "",
+      "transport": "Merl, Geesseknäpchen (S)",
+      "transportInfo": "D01, D02, D03, D04, D05, D06, D07, D08, D09, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D37, D40, D42, D44, D45, D46, D47, D48, D54, 71, 72, 73, 74, 75, 76, 78",
       "accessInfo": "",
       "pmr": false,
       "active": true,
@@ -266,7 +848,44 @@
       "media": [],
       "plans": [],
       "tutorials": [],
-      "rooms": [],
+      "rooms": [
+        {
+          "id": "salle-1788781645938",
+          "name": "B-1-1",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781658244",
+          "name": "B-1-2",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        },
+        {
+          "id": "salle-1788781675567",
+          "name": "B-1-3",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [],
+          "guideId": "",
+          "hero": "",
+          "gallery": []
+        }
+      ],
       "guideId": ""
     },
     {
