@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-09T07:58:24.270Z",
+  "updatedAt": "2026-09-10T06:42:49.001Z",
   "locations": [
     {
       "id": "lieu-1788771487307",
@@ -690,7 +690,10 @@
           "floor": "2",
           "description": "",
           "directions": "",
-          "equipment": [],
+          "equipment": [
+            "Projecteur Epson EB585wi",
+            "PC formateur"
+          ],
           "guideId": "",
           "hero": "assets/lieu-1787123499797/rooms/salle-1788781484340/hero.webp",
           "gallery": []
@@ -702,7 +705,10 @@
           "floor": "2",
           "description": "",
           "directions": "",
-          "equipment": [],
+          "equipment": [
+            "Projecteur Epson EB585wi",
+            "PC formateur"
+          ],
           "guideId": "",
           "hero": "assets/lieu-1787123499797/rooms/salle-1788940648530/hero.webp",
           "gallery": []
