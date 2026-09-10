@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-10T08:10:10.115Z",
+  "updatedAt": "2026-09-10T08:14:45.269Z",
   "locations": [
     {
       "id": "lieu-1788771487307",
@@ -1119,9 +1119,10 @@
             "Airserver",
             "Formateur PC (SFA / SFA)"
           ],
-          "guideId": "",
+          "guideId": "guide-1788334934373",
           "hero": "assets/belval-2/rooms/salle-1788767613255/hero.webp",
-          "gallery": []
+          "gallery": [],
+          "tutorialGuidePath": ""
         },
         {
           "id": "salle-1788768009475",
@@ -1135,9 +1136,10 @@
             "Airserver",
             "Formateur PC (SFA / SFA)"
           ],
-          "guideId": "",
+          "guideId": "guide-1788334934373",
           "hero": "assets/belval-2/rooms/salle-1788768009475/hero.webp",
-          "gallery": []
+          "gallery": [],
+          "tutorialGuidePath": ""
         },
         {
           "id": "salle-1788768078612",
@@ -1151,9 +1153,10 @@
             "Airserver",
             "Formateur PC (SFA / SFA)"
           ],
-          "guideId": "",
+          "guideId": "guide-1788334934373",
           "hero": "assets/belval-2/rooms/salle-1788768078612/hero.webp",
-          "gallery": []
+          "gallery": [],
+          "tutorialGuidePath": ""
         },
         {
           "id": "salle-1788768121216",
@@ -1167,9 +1170,10 @@
             "Airserver",
             "Formateur PC (SFA / SFA)"
           ],
-          "guideId": "",
+          "guideId": "guide-1788334934373",
           "hero": "assets/belval-2/rooms/salle-1788768121216/hero.webp",
-          "gallery": []
+          "gallery": [],
+          "tutorialGuidePath": ""
         },
         {
           "id": "salle-1788768176892",
@@ -1183,9 +1187,10 @@
             "Airserver",
             "Formateur PC (SFA / SFA)"
           ],
-          "guideId": "",
+          "guideId": "guide-1788334934373",
           "hero": "assets/belval-2/rooms/salle-1788768176892/hero.webp",
-          "gallery": []
+          "gallery": [],
+          "tutorialGuidePath": ""
         },
         {
           "id": "salle-1789025536698",
@@ -1199,9 +1204,10 @@
             "Airserver",
             "Formateur PC (SFA / SFA)"
           ],
-          "guideId": "",
+          "guideId": "guide-1788334934373",
           "hero": "assets/belval-2/rooms/salle-1789025536698/hero.webp",
-          "gallery": []
+          "gallery": [],
+          "tutorialGuidePath": ""
         },
         {
           "id": "salle-1789025995379",
@@ -1264,9 +1270,10 @@
             "Ecran OPTOMA 86\"",
             "Formateur PC (SFA / SFA)"
           ],
-          "guideId": "",
+          "guideId": "guide-1787204081117",
           "hero": "assets/belval-2/rooms/salle-1789027450442/hero.webp",
-          "gallery": []
+          "gallery": [],
+          "tutorialGuidePath": ""
         },
         {
           "id": "salle-1789027532752",
@@ -1279,9 +1286,10 @@
             "Ecran OPTOMA 86\"",
             "Formateur PC (SFA / SFA)"
           ],
-          "guideId": "",
+          "guideId": "guide-1787204081117",
           "hero": "assets/belval-2/rooms/salle-1789027532752/hero.webp",
-          "gallery": []
+          "gallery": [],
+          "tutorialGuidePath": ""
         }
       ],
       "website": "https://www.unipop.lu",
