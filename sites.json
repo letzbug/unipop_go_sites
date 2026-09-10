@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-10T06:42:49.001Z",
+  "updatedAt": "2026-09-10T08:06:35.418Z",
   "locations": [
     {
       "id": "lieu-1788771487307",
@@ -629,7 +629,14 @@
           ],
           "guideId": "",
           "hero": "assets/lieu-1787124120119/rooms/salle-1788769038322/hero.webp",
-          "gallery": []
+          "gallery": [
+            {
+              "path": "assets/lieu-1787124120119/rooms/salle-1788769038322/gallery/1789025407409-11.webp",
+              "name": "11.jpg",
+              "type": "image/webp",
+              "size": 43124
+            }
+          ]
         }
       ],
       "guideId": ""
@@ -666,7 +673,10 @@
           "floor": "1",
           "description": "",
           "directions": "",
-          "equipment": [],
+          "equipment": [
+            "Projecteur Epson EB585wi",
+            "PC formateur"
+          ],
           "guideId": "",
           "hero": "assets/lieu-1787123499797/rooms/salle-1788781465321/hero.webp",
           "gallery": []
@@ -1175,6 +1185,102 @@
           ],
           "guideId": "",
           "hero": "assets/belval-2/rooms/salle-1788768176892/hero.webp",
+          "gallery": []
+        },
+        {
+          "id": "salle-1789025536698",
+          "name": "C1.01.15",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Projecteur Epson EB585wi",
+            "Airserver",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "",
+          "hero": "assets/belval-2/rooms/salle-1789025536698/hero.webp",
+          "gallery": []
+        },
+        {
+          "id": "salle-1789025995379",
+          "name": "C1.01.16",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Projecteur Epson EB585wi",
+            "Airserver",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "guide-1788334934373",
+          "hero": "assets/belval-2/rooms/salle-1789025995379/hero.webp",
+          "gallery": [],
+          "tutorialGuidePath": ""
+        },
+        {
+          "id": "salle-1789026703342",
+          "name": "C1.01.17",
+          "aliases": [],
+          "floor": "1",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Projecteur Epson EB585wi",
+            "Airserver",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "guide-1788334934373",
+          "hero": "assets/belval-2/rooms/salle-1789026703342/hero.webp",
+          "gallery": [],
+          "tutorialGuidePath": ""
+        },
+        {
+          "id": "salle-1789027278807",
+          "name": "D.02.12",
+          "aliases": [],
+          "floor": "2",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Ecran Optoma 86\"",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "guide-1787204081117",
+          "hero": "assets/belval-2/rooms/salle-1789027278807/hero.webp",
+          "gallery": [],
+          "tutorialGuidePath": ""
+        },
+        {
+          "id": "salle-1789027450442",
+          "name": "D.02.13",
+          "aliases": [],
+          "floor": "2",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Ecran OPTOMA 86\"",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "",
+          "hero": "assets/belval-2/rooms/salle-1789027450442/hero.webp",
+          "gallery": []
+        },
+        {
+          "id": "salle-1789027532752",
+          "name": "D.02.19",
+          "aliases": [],
+          "floor": "2",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Ecran OPTOMA 86\"",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "",
+          "hero": "assets/belval-2/rooms/salle-1789027532752/hero.webp",
           "gallery": []
         }
       ],
