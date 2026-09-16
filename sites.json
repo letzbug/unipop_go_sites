@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-10T08:14:45.269Z",
+  "updatedAt": "2026-09-16T08:56:19.303Z",
   "locations": [
     {
       "id": "lieu-1788771487307",
@@ -25,7 +25,20 @@
       "guideId": "",
       "hero": "assets/lieu-1788771487307/hero.webp",
       "heroThumb": "assets/lieu-1788771487307/thumb.webp",
-      "gallery": [],
+      "gallery": [
+        {
+          "path": "assets/lieu-1788771487307/gallery/1789548927203-blumm-entree.webp",
+          "name": "Blumm_entree.jpg",
+          "type": "image/webp",
+          "size": 60322
+        },
+        {
+          "path": "assets/lieu-1788771487307/gallery/1789548930735-blumm-couloir.webp",
+          "name": "Blumm_couloir.jpg",
+          "type": "image/webp",
+          "size": 50440
+        }
+      ],
       "media": [],
       "plans": [],
       "tutorials": [],
@@ -42,7 +55,7 @@
             "apple TV"
           ],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1788771487307/rooms/salle-1788779106935/hero.webp",
           "gallery": []
         },
         {
@@ -57,7 +70,7 @@
             "apple TV"
           ],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1788771487307/rooms/salle-1788779141987/hero.webp",
           "gallery": []
         },
         {
@@ -72,7 +85,7 @@
             "apple TV"
           ],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1788771487307/rooms/salle-1788779184346/hero.webp",
           "gallery": []
         },
         {
@@ -87,7 +100,7 @@
             "apple TV"
           ],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1788771487307/rooms/salle-1788779204535/hero.webp",
           "gallery": []
         },
         {
@@ -102,7 +115,7 @@
             "apple TV"
           ],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1788771487307/rooms/salle-1788779221744/hero.webp",
           "gallery": []
         },
         {
@@ -117,7 +130,7 @@
             "apple TV"
           ],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1788771487307/rooms/salle-1788779237850/hero.webp",
           "gallery": []
         },
         {
@@ -132,7 +145,7 @@
             "apple TV"
           ],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1788771487307/rooms/salle-1788780690238/hero.webp",
           "gallery": []
         },
         {
@@ -147,7 +160,7 @@
             "apple TV"
           ],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1788771487307/rooms/salle-1788780785046/hero.webp",
           "gallery": []
         },
         {
@@ -162,7 +175,7 @@
             "apple TV"
           ],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1788771487307/rooms/salle-1788780979982/hero.webp",
           "gallery": []
         },
         {
@@ -177,7 +190,7 @@
             "apple TV"
           ],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1788771487307/rooms/salle-1788781029875/hero.webp",
           "gallery": []
         },
         {
@@ -294,9 +307,12 @@
           "floor": "",
           "description": "",
           "directions": "",
-          "equipment": [],
+          "equipment": [
+            "Projecteur",
+            "PC formateur"
+          ],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787826755852/rooms/salle-1788781139695/hero.webp",
           "gallery": []
         },
         {
@@ -762,7 +778,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787122149919/rooms/salle-1788781522623/hero.webp",
           "gallery": []
         },
         {
@@ -774,7 +790,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787122149919/rooms/salle-1788781538485/hero.webp",
           "gallery": []
         },
         {
@@ -786,7 +802,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787122149919/rooms/salle-1788781551053/hero.webp",
           "gallery": []
         },
         {
@@ -798,7 +814,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787122149919/rooms/salle-1788781562798/hero.webp",
           "gallery": []
         },
         {
@@ -810,7 +826,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787122149919/rooms/salle-1788781571359/hero.webp",
           "gallery": []
         },
         {
@@ -822,7 +838,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787122149919/rooms/salle-1788781588663/hero.webp",
           "gallery": []
         },
         {
@@ -834,7 +850,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787122149919/rooms/salle-1788781607865/hero.webp",
           "gallery": []
         }
       ],
@@ -860,7 +876,14 @@
       "active": true,
       "hero": "assets/lieu-1787121708997/hero.webp",
       "heroThumb": "assets/lieu-1787121708997/thumb.webp",
-      "gallery": [],
+      "gallery": [
+        {
+          "path": "assets/lieu-1787121708997/gallery/1789548970278-ecg-couloir.webp",
+          "name": "ECG_couloir.jpg",
+          "type": "image/webp",
+          "size": 98500
+        }
+      ],
       "media": [],
       "plans": [],
       "tutorials": [],
@@ -874,7 +897,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787121708997/rooms/salle-1788781645938/hero.webp",
           "gallery": []
         },
         {
@@ -886,7 +909,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787121708997/rooms/salle-1788781658244/hero.webp",
           "gallery": []
         },
         {
@@ -898,7 +921,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787121708997/rooms/salle-1788781675567/hero.webp",
           "gallery": []
         }
       ],
