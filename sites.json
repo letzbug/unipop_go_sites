@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-17T07:24:28.132Z",
+  "updatedAt": "2026-09-22T05:22:16.016Z",
   "locations": [
     {
       "id": "lieu-1788771487307",
@@ -273,7 +273,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787826755852/rooms/salle-1788781097282/hero.webp",
           "gallery": []
         },
         {
@@ -285,7 +285,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787826755852/rooms/salle-1788781111584/hero.webp",
           "gallery": []
         },
         {
@@ -297,7 +297,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787826755852/rooms/salle-1788781127075/hero.webp",
           "gallery": []
         },
         {
@@ -324,7 +324,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787826755852/rooms/salle-1788781150806/hero.webp",
           "gallery": []
         },
         {
@@ -336,7 +336,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787826755852/rooms/salle-1788781162650/hero.webp",
           "gallery": []
         },
         {
@@ -348,7 +348,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787826755852/rooms/salle-1788781178169/hero.webp",
           "gallery": []
         },
         {
@@ -360,7 +360,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787826755852/rooms/salle-1788781196892/hero.webp",
           "gallery": []
         },
         {
@@ -372,7 +372,7 @@
           "directions": "",
           "equipment": [],
           "guideId": "",
-          "hero": "",
+          "hero": "assets/lieu-1787826755852/rooms/salle-1788781206779/hero.webp",
           "gallery": []
         }
       ]
