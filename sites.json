@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-30T06:30:29.813Z",
+  "updatedAt": "2026-09-30T07:41:17.145Z",
   "locations": [
     {
       "id": "lieu-1788771487307",
@@ -699,7 +699,7 @@
         },
         {
           "id": "salle-1788781477022",
-          "name": "Cuisine",
+          "name": "F.01.01 (Cuisine)",
           "aliases": [],
           "floor": "1",
           "description": "",
@@ -711,7 +711,7 @@
         },
         {
           "id": "salle-1788781484340",
-          "name": "Artistique 2",
+          "name": "F.02.02 Artistique",
           "aliases": [],
           "floor": "2",
           "description": "",
@@ -771,7 +771,7 @@
       "rooms": [
         {
           "id": "salle-1788781522623",
-          "name": "P001 ART1",
+          "name": "..ART 1",
           "aliases": [],
           "floor": "",
           "description": "",
@@ -783,7 +783,7 @@
         },
         {
           "id": "salle-1788781538485",
-          "name": "P002 ART2",
+          "name": "..ART 2",
           "aliases": [],
           "floor": "",
           "description": "",
@@ -1311,6 +1311,22 @@
           ],
           "guideId": "guide-1787204081117",
           "hero": "assets/belval-2/rooms/salle-1789027532752/hero.webp",
+          "gallery": [],
+          "tutorialGuidePath": ""
+        },
+        {
+          "id": "salle-1790753075724",
+          "name": "D.02.01",
+          "aliases": [],
+          "floor": "2",
+          "description": "",
+          "directions": "",
+          "equipment": [
+            "Ecran Optoma 86\"",
+            "Formateur PC (SFA / SFA)"
+          ],
+          "guideId": "guide-1787204081117",
+          "hero": "",
           "gallery": [],
           "tutorialGuidePath": ""
         }
