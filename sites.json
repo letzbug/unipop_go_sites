@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-22T05:52:35.072Z",
+  "updatedAt": "2026-09-30T05:55:17.795Z",
   "locations": [
     {
       "id": "lieu-1788771487307",
@@ -684,7 +684,7 @@
       "rooms": [
         {
           "id": "salle-1788781465321",
-          "name": "Sport",
+          "name": "F.01.08 Salle Poly",
           "aliases": [],
           "floor": "1",
           "description": "",
@@ -726,7 +726,7 @@
         },
         {
           "id": "salle-1788940648530",
-          "name": "Artistique 1",
+          "name": "F.02.01 Artistique",
           "aliases": [],
           "floor": "2",
           "description": "",
@@ -967,7 +967,7 @@
       "rooms": [
         {
           "id": "salle-1786969287616",
-          "name": "Salle Yoga (Salle 2)",
+          "name": "E.00.02 Yoga",
           "aliases": [],
           "floor": "rez-de-chaussée",
           "description": "",
