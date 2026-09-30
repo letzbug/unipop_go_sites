@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-09-30T05:55:17.795Z",
+  "updatedAt": "2026-09-30T06:30:29.813Z",
   "locations": [
     {
       "id": "lieu-1788771487307",
@@ -985,7 +985,7 @@
         },
         {
           "id": "salle-1787121551271",
-          "name": "Salle de Musique",
+          "name": "E.00.12 (Musekssall)",
           "aliases": [],
           "floor": "rez-de-chaussée",
           "description": "",
