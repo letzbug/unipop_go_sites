@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "updatedAt": "2026-10-05T08:07:34.191Z",
+  "updatedAt": "2026-10-05T09:07:07.042Z",
   "locations": [
     {
       "id": "lieu-1791186890565",
@@ -9,7 +9,7 @@
       "address": "115 Rue Emile Mark,\nL-4620 Oberkorn-Differdange",
       "description": "Le 1535° Creative Hub, initié par la Ville de Differdange, est un lieu unique au Luxembourg qui vise à stimuler la créativité, l’innovation et l’entrepreneuriat dans les industries créatives.",
       "lat": 49.52167,
-      "lng": "",
+      "lng": 5.900555,
       "website": "https://1535.lu",
       "phone": "+352 58 77 11 535",
       "email": "1535@differdange.lu",
